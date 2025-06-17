@@ -1,0 +1,42 @@
+{
+  "Fire": {
+    "intro": "🔥 <b>Dominant Personality Element:</b> You are shaped by the elemental grace of <b>Fire</b> — nurtured by your Ascendant in <b>{ascendant}</b> and Moon in <b>{moon_sign}</b>.<br><br>While your inner fire fuels passion and transformation, your current energetic state reflects an imbalance in <b>{current_element}</b>, calling for mindfulness and recalibration.<br><br><b>Why this matters:</b> Imbalance in {current_element} occurs due to overthinking, constant multitasking, or overstimulation from technology and noise. This can result in scattered thoughts, insomnia, decision fatigue, and emotional detachment.<br><br><i>Agnideva</i> is more than a fragrance — it's a sacred recalibration tool that helps you ground, transform, and return to center.",
+    "insights": [
+      "Your inner fire blazes strong — but without direction, it can consume rather than create.",
+      "When your will outpaces your wisdom, Fire burns out instead of building up.",
+      "Overcommitment and drive without rest can overheat your system.",
+      "You may feel impatient or quick to anger when your inner fire lacks balance.",
+      "Fiery ambition is admirable, but too much can leave you scorched emotionally.",
+      "You're burning bright — but burnout looms without conscious calm.",
+      "Your passion ignites ideas, but unchecked, it may overwhelm others.",
+      "An overactive Fire element often shows in restlessness and emotional volatility.",
+      "Temper your fire with breath, space, and grounding movement.",
+      "You're wired to lead — but a blazing ego can alienate your allies.",
+      "Burning desire can blind you to subtle guidance. Recenter.",
+      "Action without reflection can make fire destructive. Slow down.",
+      "You carry sacred heat. But even Agni needs ritual and rhythm.",
+      "Let your fire warm, not scorch. Breathe before you leap.",
+      "Your spirit is a torch — don't let it burn out from overuse."
+    ]
+  },
+  "Water": {
+    "intro": "🌊 <b>Dominant Personality Element:</b> You are guided by the elemental flow of <b>Water</b> — emotionally deep, intuitive, and nurturing, shaped by your Ascendant in <b>{ascendant}</b> and Moon in <b>{moon_sign}</b>.<br><br>As you move through life’s waves, an emerging imbalance in <b>{current_element}</b> may be clouding your clarity and stability.<br><br><b>Why this matters:</b> Imbalance in {current_element} may manifest as emotional withdrawal, hypersensitivity, or creative stagnation.<br><br><i>Jalasākti</i> is your soul’s stream — flowing gently to restore empathy, intuition, and inner calm.",
+    "insights": [
+      "You absorb emotions like waves — but don’t forget to anchor.",
+      "When empathy overwhelms, Water drowns clarity.",
+      "Emotional suppression may pool silently — longing for release.",
+      "You might feel adrift or overly sensitive when Water dominates.",
+      "Over-nurturing others can drain your own reservoir.",
+      "Unexpressed sorrow may manifest as fatigue or avoidance.",
+      "Let tears flow when needed. They purify.",
+      "Your emotional ocean is sacred — keep it flowing, not flooding.",
+      "You’re deeply intuitive — but boundaries keep your vessel strong.",
+      "Reflect, don’t ruminate. Let stillness replace swirl.",
+      "Water teaches surrender — but not to chaos.",
+      "Balance receiving with cleansing. Ground through ritual.",
+      "Acknowledge your tides. They’re part of your power.",
+      "You're not too sensitive — you're spiritually attuned. Just direct it.",
+      "Create sacred pauses to restore your emotional depth."
+    ]
+  }
+}

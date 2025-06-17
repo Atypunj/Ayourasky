@@ -1,0 +1,13 @@
+{
+  "imbalanced_transitions": [
+    "However, due to recent planetary alignments, your energetic state has shifted \u2014 revealing an imbalance in the element of {current_element}.",
+    "While your core essence is rooted in {birth_element}, current cosmic movements have stirred an imbalance in {current_element}, inviting restoration.",
+    "Planetary influences now highlight an energetic disruption in the element of {current_element}, distinct from your native strengths.",
+    "Though you are naturally guided by {birth_element}, current astral tides suggest an imbalance in {current_element}."
+  ],
+  "balanced_transitions": [
+    "Your birth and current energies both align under the element of {birth_element}, offering a unique opportunity to deepen and refine its qualities.",
+    "At this moment, your elemental balance mirrors your birth \u2014 the essence of {birth_element} seeks elevation, not correction.",
+    "This is a rare time where your soul\u2019s original element, {birth_element}, remains steady \u2014 inviting conscious cultivation rather than redirection."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+    "Spiritual": [
+        "Where the sacred winds whispered in {place}, {name},",
+        "Bathed in celestial light over {place}, {name},",
+        "At the cosmic gateway of {place}, {name},",
+        "{name}, Bathed in divine light over {place}",
+        "{name}, Where the sacred winds whispered in {place}",
+        "{name}, From the realm of the soul near {place}",
+        "{name}, Born under starlit blessings of {place}"
+    ],
+    "Healing": [
+        "In the healing embrace of {place}, {name},",
+        "Where inner light shines bright in {place}, {name},",
+        "From the soulful land of {place}, {name}, emerges grace"
+    ],
+    "Wisdom": [
+        "At the thoughtful crossroads of {place}, {name},",
+        "With ancient wisdom rooted in {place}, {name},",
+        "As the stars aligned over {place}, {name},"
+    ],
+    "Empowering": [
+        "{name}, From the fire-forged horizon of {place}",
+        "{name}, Born of bold dreams in {place}",
+        "{name}, Crowned in willpower from {place}",
+        "{name}, Emerging from strength in {place}"
+    ],
+    "Romantic": [
+        "{name}, As Venus danced over {place}",
+        "{name}, Beneath the fragrant skies of {place}",
+        "{name}, Where love wrote its name in {place}",
+        "{name}, Blushed by divine affection in {place}"
+    ],
+    "Minimalist": [
+        "{name}, Born simply in {place}",
+        "In {place}, {name}, a soul quietly awakened",
+        "{name}, Light emerged from {place}",
+        "{name}, Silence welcomed you in {place}"
+    ],
+    "Mystical": [
+        "{name}, Wrapped in cosmic mist above {place}",
+        "{name}, Where the stars held secrets in {place}",
+        "{name}, As shadows danced with light in {place}",
+        "{name}, From the hidden realms of {place}"
+    ],
+    "Compassionate": [
+        "{name}, With healing breath from {place}",
+        "{name}, Born to nurture in the heart of {place}",
+        "{name}, From the gentle strength of {place}",
+        "{name}, Cradled in love\u2019s arms in {place}"
+    ],
+    "Philosophical": [
+        "{name}, As truth awakened in {place}",
+        "{name}, From wisdom\u2019s well in {place}",
+        "{name}, In deep reflection near {place}",
+        "{name}, Bathed in insight at {place}"
+    ],
+    "Royal": [
+        "{name}, Crowned by stars above {place}",
+        "{name}, In the courts of destiny at {place}",
+        "{name}, As the cosmos knelt to greet you in {place}",
+        "Royal by soul, {name}, born in {place}"
+    ],
+    "Cosmic": [
+        "{name}, Formed from starborn purpose in {place}",
+        "{name}, Drawn from galactic grace in {place}",
+        "{name}, A vessel of divine force in {place}",
+        "{name}, Sung into existence by the universe over {place}"
+    ]
+}

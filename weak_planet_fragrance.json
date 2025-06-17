@@ -1,0 +1,49 @@
+{
+    "Sun": [
+        "Frankincense Oil (Sacred Dhupa)",
+        "Kesar Oil (Sage's Blessing)",
+        "Sandalwood Oil (Sandalwood Nirvana)"
+    ],
+    "Moon": [
+        "Jasmine Oil (Vrindavan Pushpa)",
+        "Lavender Oil (Shanti Chaitanya)",
+        "Lotus Oil (Kamal Sparsh)",
+        "Rose Oil (Radha Rasa)",
+        "Vetiver Oil (Bhoomi Aura)"
+    ],
+    "Jupiter": [
+        "Frankincense Oil (Sacred Dhupa)",
+        "Kesar Oil (Sage's Blessing)",
+        "Lotus Oil (Kamal Sparsh)"
+    ],
+    "Rahu": [
+        "Camphor Oil (Aarti Aroma)",
+        "Loban Oil (Pavitra Dhuna)",
+        "Patchouli Oil (Bhakti Kusum)"
+    ],
+    "Mercury": [
+        "Cedarwood Oil (Kalpavriksha Moksh)"
+    ],
+    "Venus": [
+        "Jasmine Oil (Vrindavan Pushpa)",
+        "Lotus Oil (Kamal Sparsh)",
+        "Rose Oil (Radha Rasa)",
+        "Sandalwood Oil (Sandalwood Nirvana)"
+    ],
+    "Ketu": [
+        "Agarwood Oil (Oud Nirvana)",
+        "Camphor Oil (Aarti Aroma)",
+        "Sandalwood Oil (Sandalwood Nirvana)",
+        "Tagar Oil (Tapovan Sadhana)"
+    ],
+    "Saturn": [
+        "Cedarwood Oil (Kalpavriksha Moksh)",
+        "Myrrh Oil (Tapasya Nectar)",
+        "Vetiver Oil (Bhoomi Aura)"
+    ],
+    "Mars": [
+        "Myrrh Oil (Tapasya Nectar)",
+        "Patchouli Oil (Bhakti Kusum)",
+        "Tagar Oil (Tapovan Sadhana)"
+    ]
+}
