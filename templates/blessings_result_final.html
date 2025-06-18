@@ -47,7 +47,7 @@
 
   {% if result.weak_planet and result.weak_fragrance %}
     <p><strong>Weak Planet Identified:</strong> {{ result.weak_planet }}</p>
-    <p><strong>Suggested Fragrance for Healing:</strong> {{ result.weak_fragrance }}</p>
+    <p><strong>Suggested Fragrance for Healing:</strong> {{ result.weak_fragrance.split('(')[1].rstrip(')') if '(' in result.weak_fragrance else result.weak_fragrance }}</p>
   {% else %}
     <p><em>No weak planet fragrance guidance available at the moment.</em></p>
   {% endif %}
