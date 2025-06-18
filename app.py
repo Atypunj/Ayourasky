@@ -411,6 +411,7 @@ def build_elemental_intro(birth_element, current_element, ascendant, moon_sign):
         ascendant=ascendant,
         moon_sign=moon_sign
     )
+
     if birth_element == current_element:
         transition_line = random.choice(transition_templates["balanced_transitions"]).format(
             birth_element=birth_element
@@ -420,10 +421,18 @@ def build_elemental_intro(birth_element, current_element, ascendant, moon_sign):
             birth_element=birth_element,
             current_element=current_element
         )
+
+    # ✅ Add dynamic fragrance name using current_element
+    with open("elemental_display_fragrance_map.json", "r", encoding="utf-8") as f:
+        fragrance_map = json.load(f)
+    fragrance_name = fragrance_map.get(current_element, {}).get("name", "a sacred fragrance")
+
     imbalance_para = imbalance_map[current_element].format(
         ascendant=ascendant,
-        moon_sign=moon_sign
+        moon_sign=moon_sign,
+        fragrance=fragrance_name
     )
+
     return f"<b>🔥 Dominant Personality Element:</b> {birth_para}<br><br>{transition_line}<br><br>{imbalance_para}"
 
 
