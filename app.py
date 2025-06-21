@@ -441,8 +441,18 @@ def index():
     if request.method == "POST":
         name = request.form["name"]
         gender = request.form["gender"]
-        dob = request.form["dob"]
-        tob = request.form["tob"]
+        from datetime import datetime
+
+dob_str = request.form["dob"]  # DD-MM-YYYY
+tob_str = request.form["tob"]  # HH:MM AM/PM
+
+# Convert to YYYY-MM-DD and HH:MM
+dob_dt = datetime.strptime(dob_str, "%d-%m-%Y")
+tob_dt = datetime.strptime(tob_str, "%I:%M %p")
+
+dob = dob_dt.strftime("%Y-%m-%d")
+tob = tob_dt.strftime("%H:%M")
+
         place = request.form["pob"]
         lat = float(request.form["latitude"        ])
         lon = float(request.form["longitude"        ])
