@@ -74,6 +74,14 @@ def get_soul_scent(ldn, mahadasha, antardasha):
 import json
 with open("dasha_guidance_map.json", "r", encoding="utf-8") as f:
     DASHA_GUIDANCE = json.load(f)
+import json
+
+# Load dasha sequence and years from external JSON file
+with open("dasha_data.json", "r", encoding="utf-8") as f:
+    dasha_data = json.load(f)
+
+dasha_sequence = dasha_data["sequence"]
+dasha_years = dasha_data["years"]
 import swisseph as swe
 RAHU_ID = swe.MEAN_NODE  # Rahu (mean node)
 KETU_ID = swe.TRUE_NODE  # Ketu (true node)
@@ -111,17 +119,33 @@ def get_rashi_lord(rashi):
     }
     return rashi_lords.get(rashi, "Unknown")
 
+
 def get_current_antardasha(mahadasha_lord, mahadasha_start_jd):
     sequence = ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"]
-    dasha_years = {
-        "Ketu": 7, "Venus": 20, "Sun": 6, "Moon": 10, "Mars": 7,
-        "Rahu": 18, "Jupiter": 16, "Saturn": 19, "Mercury": 17
-    }
-
     antardasha_durations = {}
     for lord in sequence:
         proportion = dasha_years[lord] / 120
         antardasha_durations[lord] = proportion * dasha_years[mahadasha_lord] * 365.25
+
+    today_jd = swe.julday(*datetime.datetime.today().timetuple()[:3])
+    current_jd = mahadasha_start_jd
+
+    for lord in sequence:
+        start = current_jd
+        end = start + antardasha_durations[lord]
+
+        if start <= today_jd <= end:
+            start_date = swe.revjul(start)
+            end_date = swe.revjul(end)
+            return (
+                lord,
+                f"{int(start_date[2])}-{int(start_date[1])}-{int(start_date[0])}",
+                f"{int(end_date[2])}-{int(end_date[1])}-{int(end_date[0])}"
+            )
+
+        current_jd = end
+
+    return "Unknown", "", ""
 
     antardashas = []
     current_jd = mahadasha_start_jd
@@ -144,13 +168,38 @@ def get_current_antardasha(mahadasha_lord, mahadasha_start_jd):
 
         return "Unknown", "", ""
 
-def get_vimshottari_dasha(jd, moon_long):
-    dasha_sequence = ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"]
+
+def get_current_mahadasha(jd, moon_long):
     nakshatra_length = 13.3333
-    dasha_years = {
-        "Ketu": 7, "Venus": 20, "Sun": 6, "Moon": 10, "Mars": 7,
-        "Rahu": 18, "Jupiter": 16, "Saturn": 19, "Mercury": 17
-    }
+    index = int(moon_long / nakshatra_length)
+    lord = dasha_sequence[index % 9]
+    position_in_nak = moon_long % nakshatra_length
+    percentage = position_in_nak / nakshatra_length
+    elapsed = percentage * dasha_years[lord]
+    start_jd = jd - (elapsed * 365.25)
+    timeline = []
+    current_jd = start_jd
+    for i in range(100):  # safety loop
+        l = dasha_sequence[(index + i) % 9]
+        duration = dasha_years[l] * 365.25
+        end_jd = current_jd + duration
+        timeline.append((l, current_jd, end_jd))
+        if swe.julday(*datetime.datetime.today().timetuple()[:3]) < end_jd:
+            break
+        current_jd = end_jd
+    for l, start, end in timeline:
+        if start <= swe.julday(*datetime.datetime.today().timetuple()[:3]) <= end:
+            start_date = swe.revjul(start)
+            end_date = swe.revjul(end)
+            return (
+                l,
+                f"{int(start_date[2])}-{int(start_date[1])}-{int(start_date[0])}",
+                f"{int(end_date[2])}-{int(end_date[1])}-{int(end_date[0])}",
+                start
+            )
+    return "Unknown", "", "", jd
+def get_vimshottari_dasha(jd, moon_long):
+    nakshatra_length = 13.3333
     index = int(moon_long / nakshatra_length)
     lord = dasha_sequence[index % 9]
     position_in_nak = moon_long % nakshatra_length
@@ -500,7 +549,9 @@ def index():
     
         # Calculate Soul Scent
         ldn = life_path
-        soul_scent = get_soul_scent(ldn, "Venus", "Mercury")  # Replace with dynamic Mahadasha/Antardasha if needed
+        mahadasha_lord, mahadasha_start_str, mahadasha_end_str, mahadasha_start_jd = get_current_mahadasha(jd, moon.lon)
+        antardasha_lord, antardasha_start_str, antardasha_end_str = get_current_antardasha(mahadasha_lord, mahadasha_start_jd)
+        soul_scent = get_soul_scent(ldn, mahadasha_lord, antardasha_lord)
         fomo_list = LIFE_PATH_FOMO_MAP.get(str(life_path), [        ])
         life_path_fomo = random.choice(fomo_list).format(name=name) if fomo_list else ""
     
@@ -544,10 +595,12 @@ def index():
             "sun_sign": sun.sign, "nakshatra": nakshatra, "life_path": life_path,
             "life_path_fomo": life_path_fomo,
             "element": element, "rashi_lord": rashi_lord,
-            "mahadasha": "Venus", "mahadasha_start": mahadasha_start.strftime("%d %b %Y"),
-            "mahadasha_end": mahadasha_end.strftime("%d %b %Y"),
-            "antardasha": "Mercury", "antardasha_start": antardasha_start.strftime("%d %b %Y"),
-            "antardasha_end": antardasha_end.strftime("%d %b %Y"),
+            "mahadasha": mahadasha_lord,
+            "mahadasha_start": mahadasha_start_str,
+            "antardasha_start": antardasha_start_str,
+            "mahadasha_end": mahadasha_end_str,
+            "antardasha": antardasha_lord,
+            "antardasha_end": antardasha_end_str,
             "remedies": remedies,
             "fragrance_name": "Vrindavan Pushpa", "offering_to": "ShivShakti",
             "duration": "Daily through Mercury Antardasha (until 2026)",
@@ -588,7 +641,7 @@ def index():
             result["random_elemental_insight"] = None
     
         add_elemental_blessing(result)
-        key = f"{result['mahadasha']}_{result['antardasha']}".title()
+        key = f"{mahadasha_lord}_{antardasha_lord}".title()
         result["dasha_guidance"] = DASHA_GUIDANCE.get(key, "Guidance not available.")
         result['weak_planet'] = get_weak_planet_from_chart(chart, dasha_planets)
         result['weak_fragrance'] = get_fragrance_for_weak_planet(result['weak_planet'])
@@ -612,7 +665,14 @@ def index():
         result["offering_to"] = antardasha_deity_map.get(result["antardasha"], "Lord Shiva – Devon ke Dev")
 
         session['blessing_result'] = json.dumps(result)
-        return render_template("blessings_result_final.html", result=result)
+
+        # 🌸 Add Mahadasha & Antardasha fragrance lookups
+        maha_frag = get_fragrance_for_weak_planet(result['mahadasha'])
+        anta_frag = get_fragrance_for_weak_planet(result['antardasha'])
+
+        # ✅ Final return with all values passed
+        return render_template("blessings_result_final.html", result=result, maha_frag=maha_frag, anta_frag=anta_frag)
+
     
     return render_template("blessings.html")
 
