@@ -77,7 +77,7 @@
     <p><strong>🌞 Solar Influence – Weak {{ result.weak_planet }}</strong> <strong>Healing Offering:</strong> Apply <strong>
       {{ result.weak_fragrance.split('(')[1].rstrip(')') if '(' in result.weak_fragrance else result.weak_fragrance }}</strong> 
       to gently balance {{ result.weak_planet }}’s diminished influence.  
-      This sacred essence supports vitality, leadership, and emotional clarity.  
+      {{ result.weak_healing_message }}  
       If you're feeling drained, directionless, or overly reactive, let this aroma ground your energy and restore inner strength through mindful application or prayer.</p>
   {% else %}
     <p><em>No weak planet fragrance guidance available at the moment.</em></p>
