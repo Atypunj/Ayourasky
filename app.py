@@ -15,6 +15,19 @@ def get_life_path_affirmation(name, life_path):
 
 
 # Mapping of weak planets to healing fragrances
+
+WEAK_PLANET_HEALING_MESSAGES = {
+    "Sun": "This sacred essence energizes confidence, visibility, and healthy self-expression.",
+    "Moon": "This sacred essence restores emotional rhythm, empathy, and intuitive connection.",
+    "Mars": "This sacred essence supports vitality, leadership, and emotional clarity.",
+    "Mercury": "This sacred essence enhances communication, focus, and balanced reasoning.",
+    "Jupiter": "This sacred essence nourishes spiritual growth, wisdom, and benevolence.",
+    "Venus": "This sacred essence attracts love, harmony, and sensory refinement.",
+    "Saturn": "This sacred essence reinforces discipline, structure, and karmic resilience.",
+    "Rahu": "This sacred essence grounds illusion, tempers obsession, and restores clarity.",
+    "Ketu": "This sacred essence clears confusion, deepens detachment, and restores spiritual stillness."
+}
+
 WEAK_PLANET_FRAGRANCES = {
     "Sun": ["Sandalwood Nirvana", "Sacred Dhupa", "Sage's Blessing"],
     "Moon": ["Vrindavan Pushpa", "Radha Rasa", "Lavender Oil", "Lotus Oil", "Vetiver Oil"],
@@ -675,6 +688,7 @@ def index():
         result['weak_planet'] = get_weak_planet_from_chart(chart, dasha_planets)
         result['weak_fragrance'] = get_fragrance_for_weak_planet(result['weak_planet'])
         result["score"] = result["alignment_score"]
+        result["weak_healing_message"] = WEAK_PLANET_HEALING_MESSAGES.get(result["weak_planet"], "")
         
     
 
