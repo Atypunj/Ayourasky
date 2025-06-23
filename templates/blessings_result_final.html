@@ -1,17 +1,43 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your Divine Blueprint</title>
-<style>
-    body { font-family: Georgia, serif; margin: 20px; line-height: 1.6; background: #fffdf6; }
-    h1, h2 { color: #b06ab3; }
-    .score-bar { background: #ddd; border-radius: 10px; overflow: hidden; width: 100%; height: 20px; margin-top: 5px; }
-    .score-fill { background: #6ab3a3; height: 100%; width: {{ result.score }}%; }
-    blockquote { background: #f9f9f9; border-left: 5px solid #ccc; padding: 10px; margin: 10px 0; font-style: italic; }
-    .section { margin-bottom: 30px; }
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Divine Blueprint</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      margin: 20px;
+      line-height: 1.6;
+      background: #fffdf6;
+    }
+    h1, h2 {
+      color: #b06ab3;
+    }
+    .score-bar {
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      height: 20px;
+      margin-top: 5px;
+    }
+    .score-fill {
+      background: #6ab3a3;
+      height: 100%;
+    }
+    blockquote {
+      background: #f9f9f9;
+      border-left: 5px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+      font-style: italic;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+  </style>
 </head>
 <body>
 
@@ -30,44 +56,32 @@
 </div>
 
 <div class="section">
-  <h2>🌌 Your Current Planetary Flow</h2>
+  <h2>🌌 Your Planetary Flow & 🌿 Fragrance-Led Ritual for Inner Balance</h2>
+
   <p>
-      <strong>Mahadasha:</strong> {{ result.mahadasha }} ({{ result.mahadasha_start }} – {{ result.mahadasha_end }}) &emsp;
-      <strong>Antardasha:</strong> {{ result.antardasha }} ({{ result.antardasha_start }} – {{ result.antardasha_end }})
+    <strong>Mahadasha:</strong> {{ result.mahadasha }} ({{ result.mahadasha_start }} – {{ result.mahadasha_end }}) &emsp;
+    <strong>Antardasha:</strong> {{ result.antardasha }} ({{ result.antardasha_start }} – {{ result.antardasha_end }})
   </p>
   <p><strong>🧭 Guidance:</strong> {{ result.dasha_guidance }}</p>
 
-<div class="section">
-  <h2>🌸 Fragrance Suggestions</h2>
-  <p><strong>Mahadasha ({{ result.mahadasha }}):</strong> {{ maha_frag }}</p>
-  <p><strong>Antardasha ({{ result.antardasha }}):</strong> {{ anta_frag }}</p>
+  <p><strong>🔹 Elemental Fragrance:</strong> {{ result.fragrance_inspired_name }}<br>
+  <em>A water-aligned essence for emotional clarity, inner calm, and graceful flow.</em></p>
+
+  <p><strong>🔥 Mahadasha Healing Offering:</strong> You should offer <strong>{{ maha_frag }}</strong> in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}. This ritual grounds intensity and fosters clarity. You may dedicate this offering to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong>. <em>This is more than a scent — it’s a doorway. Let {{ maha_frag }} anchor your transformation from this moment on.</em></p>
+
+  <p><strong>🌙 Antardasha Healing Offering:</strong> Offer <strong>{{ anta_frag }}</strong> in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul. If a <strong>{{ result.antardasha }}</strong> idol — representing <strong>{{ result.offering_to }}</strong> — is unavailable, invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> throughout the Antardasha which ends on {{ result.antardasha_end }}.</p>
 </div>
 
-</div>
-
 <div class="section">
-  <h2>Your Healing Ritual</h2>
-  <p><strong>Elemental Oil:</strong> {{ result.fragrance_inspired_name }}</p>
-  <p><strong>Fragrance Offering:</strong> 
-  Offer <strong>{{ result.fragrance_name }}</strong> in reverence to <strong>{{ result.offering_to }}</strong> — the divine expression of your Antardasha Lord who governs your current life themes and lessons,
-  <em>or to Lord Shiva, if an idol or symbol is not available</em>.
-</p>
-  <p><strong>Ritual Duration:</strong> {{ result.duration }}</p>
-
   {% if result.weak_planet and result.weak_fragrance %}
-    <p><strong>Weak Planet Identified:</strong> {{ result.weak_planet }}</p>
-    <p><strong>Suggested Fragrance for Healing:</strong> {{ result.weak_fragrance.split('(')[1].rstrip(')') if '(' in result.weak_fragrance else result.weak_fragrance }}</p>
+    <p><strong>🌞 Solar Influence – Weak {{ result.weak_planet }}</strong> <strong>Healing Offering:</strong> Apply <strong>
+      {{ result.weak_fragrance.split('(')[1].rstrip(')') if '(' in result.weak_fragrance else result.weak_fragrance }}</strong> 
+      to gently balance {{ result.weak_planet }}’s diminished influence.  
+      This sacred essence supports vitality, leadership, and emotional clarity.  
+      If you're feeling drained, directionless, or overly reactive, let this aroma ground your energy and restore inner strength through mindful application or prayer.</p>
   {% else %}
     <p><em>No weak planet fragrance guidance available at the moment.</em></p>
   {% endif %}
-</div>
-
-<div class="section">
-  <h2>🌌 Cosmic Alignment Score</h2>
-  <p>{{ result.score }}% Aligned</p>
-  <div class="score-bar">
-    <div class="score-fill" style="width: {{ result.score }}%;"></div>
-  </div>
 </div>
 
 <div class="section">
