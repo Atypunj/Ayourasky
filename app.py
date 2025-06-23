@@ -54,6 +54,33 @@ def get_planetary_guidance(mahadasha, antardasha):
     return soul_scent_logic.get("planetary_guidance", {}).get(key, {})
 
 from flask import Flask, render_template, request, session
+
+
+# Mapping Antardasha planets to full Antardasha names
+ANTARDASHA_TITLE_MAP = {
+    "Sun": "Surya Antardasha",
+    "Moon": "Chandra Antardasha",
+    "Mars": "Mangal Antardasha",
+    "Mercury": "Budha Antardasha",
+    "Jupiter": "Guru Antardasha",
+    "Venus": "Shukra Antardasha",
+    "Saturn": "Shani Antardasha",
+    "Rahu": "Rahu Antardasha",
+    "Ketu": "Ketu Antardasha"
+}
+
+# Mapping planets to their representative weekdays
+PLANET_WEEKDAY_MAP = {
+    "Sun": "Sunday",
+    "Moon": "Monday",
+    "Mars": "Tuesday",
+    "Mercury": "Wednesday",
+    "Jupiter": "Thursday",
+    "Venus": "Friday",
+    "Saturn": "Saturday",
+    "Rahu": "Saturday",
+    "Ketu": "Tuesday"
+}
 from flatlib.chart import Chart
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
@@ -491,7 +518,9 @@ def index():
         latitude = request.form.get("latitude", "").strip()
         longitude = request.form.get("longitude", "").strip()
         if not latitude or not longitude:
-            return render_template("blessings.html", result={"error": "Location not found. Please select your city and state from suggestions."})
+            return render_template("blessings.html", result={"error": "Location not found. Please select your city and state from suggestions."},
+        antardasha_title=ANTARDASHA_TITLE_MAP.get(result['antardasha'], result['antardasha']),
+        antardasha_weekday=PLANET_WEEKDAY_MAP.get(result['antardasha'], 'Unknown'))
         try:
             lat = float(latitude)
             lon = float(longitude)
@@ -668,7 +697,11 @@ def index():
 
         # 🌸 Add Mahadasha & Antardasha fragrance lookups
         maha_frag = get_fragrance_for_weak_planet(result['mahadasha'])
+        if '(' in maha_frag:
+            maha_frag = maha_frag.split('(')[1].rstrip(')')
         anta_frag = get_fragrance_for_weak_planet(result['antardasha'])
+        if '(' in anta_frag:
+            anta_frag = anta_frag.split('(')[1].rstrip(')')
 
         # ✅ Final return with all values passed
         return render_template("blessings_result_final.html", result=result, maha_frag=maha_frag, anta_frag=anta_frag)
