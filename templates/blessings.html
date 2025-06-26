@@ -131,33 +131,49 @@
     </footer>
 
     <script>
-        async function fetchLatLon() {
-            const city = document.getElementById('city').value.trim();
-            const state = document.getElementById('state').value.trim();
-            const pob = `${city}, ${state}, India`;
-            document.getElementById('pob').value = pob;
+  async function fetchLatLon() {
+    const city = document.getElementById("city").value;
+    const state = document.getElementById("state").value;
 
-            if (city.length < 2 || state.length < 2) return;
+    const location = `${city}, ${state}`;
+    const latInput = document.getElementById("latitude");
+    const lonInput = document.getElementById("longitude");
 
-            const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}&country=India&format=json`;
+    try {
+      // 1. Try Nominatim
+      const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
+      const response = await fetch(nominatimUrl);
+      const data = await response.json();
 
-            try {
-                const response = await fetch(url, { headers: { 'Accept-Language': 'en' } });
-                const data = await response.json();
+      if (data && data.length > 0) {
+        latInput.value = data[0].lat;
+        lonInput.value = data[0].lon;
+        return;
+      }
 
-                if (data.length > 0) {
-                    document.getElementById('latitude').value = data[0].lat;
-                    document.getElementById('longitude').value = data[0].lon;
-                } else {
-                    document.getElementById('latitude').value = '';
-                    document.getElementById('longitude').value = '';
-                }
-            } catch (e) {
-                console.error('Nominatim lookup failed', e);
-                document.getElementById('latitude').value = '';
-                document.getElementById('longitude').value = '';
-            }
-        }
-    </script>
+      // 2. Fallback: Google Geocoding API
+      const googleApiKey = "AIzaSyC0eOOc2RaD78BtI6Dgd4lB5yOxcDmIy_I";
+      const googleUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${googleApiKey}`;
+      const googleResponse = await fetch(googleUrl);
+      const googleData = await googleResponse.json();
+
+      if (googleData.status === "OK" && googleData.results.length > 0) {
+        const coords = googleData.results[0].geometry.location;
+        latInput.value = coords.lat;
+        lonInput.value = coords.lng;
+        return;
+      }
+
+      // If all fails
+      alert("Location not found. Please check your input or try a nearby town.");
+      latInput.value = "";
+      lonInput.value = "";
+
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+      alert("An error occurred while finding your location.");
+    }
+  }
+</script>
 </body>
 </html>
