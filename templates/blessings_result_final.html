@@ -75,14 +75,14 @@
 
   <p><strong>🔹 Elemental Fragrance:</strong>
     <a href="{{ result.fragrance_url }}" target="_blank" style="color: #384C65; text-decoration: none; font-weight: bold;">
-      {{ result.fragrance_inspired_name }}
+      {{ result.fragrance_inspired_name_linked | safe }}
     </a><br>
     <em>A water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
   </p>
 
-  <p><strong>🔥 Mahadasha Healing Offering:</strong> You should offer <strong>{{ maha_frag }}</strong> in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}. This ritual grounds intensity and fosters clarity. You may dedicate this offering to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong>. <em>This is more than a scent — it’s a doorway. Let {{ maha_frag }} anchor your transformation from this moment on.</em></p>
+  <p><strong>🔥 Mahadasha Healing Offering:</strong> You should offer <strong>{{ maha_frag | safe }}</strong> in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}. This ritual grounds intensity and fosters clarity. You may dedicate this offering to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong>. <em>This is more than a scent — it’s a doorway. Let {{ maha_frag }} anchor your transformation from this moment on.</em></p>
 
-  <p><strong>🌙 Antardasha Healing Offering:</strong> Offer <strong>{{ anta_frag }}</strong> in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul. If a <strong>{{ result.antardasha }}</strong> idol — representing <strong>{{ result.offering_to }}</strong> — is unavailable, invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> throughout the Antardasha which ends on {{ result.antardasha_end }}.</p>
+  <p><strong>🌙 Antardasha Healing Offering:</strong> Offer <strong>{{ anta_frag | safe }}</strong> in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul. If a <strong>{{ result.antardasha }}</strong> idol — representing <strong>{{ result.offering_to }}</strong> — is unavailable, invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> throughout the Antardasha which ends on {{ result.antardasha_end }}.</p>
 </div>
 
 <div class="section">
