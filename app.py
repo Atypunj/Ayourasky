@@ -5,9 +5,7 @@ import random
 loaded = False
 FRAGRANCE_LINKS = {}
 for _fname in [
-    'fragrance_links.fixed.json',
-    'fragrance_links (1).json',
-    'fragrance_links.json'
+    'fragrance_links.fixed.json'
 ]:
     try:
         with open(_fname, 'r', encoding='utf-8') as _fl:
@@ -762,8 +760,11 @@ def index():
         key = f"{mahadasha_lord}_{antardasha_lord}".title()
         result["dasha_guidance"] = DASHA_GUIDANCE.get(key, "Guidance not available.")
         result['weak_planet'] = get_weak_planet_from_chart(chart, dasha_planets)
-        result['weak_fragrance_text'] = normalize_to_inspired(get_fragrance_for_weak_planet(result['weak_planet']))
+        tmp_weak = get_fragrance_for_weak_planet(result['weak_planet'])
+        tmp_weak = _extract_inner_paren(tmp_weak)
+        result['weak_fragrance_text'] = normalize_to_inspired(tmp_weak)
         result['weak_fragrance'] = _linkify(result['weak_fragrance_text'])
+        result['weak_fragrance_linked'] = result['weak_fragrance']
         result["score"] = result["alignment_score"]
         result["weak_healing_message"] = WEAK_PLANET_HEALING_MESSAGES.get(result["weak_planet"], "")
         
@@ -787,18 +788,20 @@ def index():
         session['blessing_result'] = json.dumps(result)
 
         # 🌸 Add Mahadasha & Antardasha fragrance lookups
-        maha_frag = get_fragrance_for_weak_planet(result['mahadasha'])
-        maha_frag = _linkify(normalize_to_inspired(maha_frag))
-        if '(' in maha_frag:
-            maha_frag = maha_frag.split('(')[1].rstrip(')')
-        anta_frag = get_fragrance_for_weak_planet(result['antardasha'])
-        anta_frag = _linkify(normalize_to_inspired(anta_frag))
-        if '(' in anta_frag:
-            anta_frag = anta_frag.split('(')[1].rstrip(')')
+        maha_frag_raw = get_fragrance_for_weak_planet(result['mahadasha'])
+        maha_core = _extract_inner_paren(maha_frag_raw)
+        maha_core = normalize_to_inspired(maha_core)
+        maha_frag = _linkify(maha_core)
+        # removed: no split after linkify; we already extracted inner
+        anta_frag_raw = get_fragrance_for_weak_planet(result['antardasha'])
+        anta_core = _extract_inner_paren(anta_frag_raw)
+        anta_core = normalize_to_inspired(anta_core)
+        anta_frag = _linkify(anta_core)
+        # removed: no split after linkify; we already extracted inner
 
         # ✅ Final return with all values passed
-        result["mahadasha_frag_linked"]  = _linkify(normalize_to_inspired(get_fragrance_for_weak_planet(result["mahadasha"])))
-        result["antardasha_frag_linked"] = _linkify(normalize_to_inspired(get_fragrance_for_weak_planet(result["antardasha"])))
+        result["mahadasha_frag_linked"]  = _linkify(maha_core)
+        result["antardasha_frag_linked"] = _linkify(anta_core)
         result["weak_fragrance_linked"]  = _linkify(result.get("weak_fragrance", ""))
 
         return render_template("blessings_result_final.html", result=result, maha_frag=maha_frag, anta_frag=anta_frag)
