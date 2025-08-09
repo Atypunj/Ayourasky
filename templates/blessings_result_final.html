@@ -61,7 +61,8 @@
 <div class="section">
   {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
     <p>
-      <strong>🌞 Solar Influence – Weak {{ result.weak_planet }}</strong> <strong>Healing Offering:</strong>
+      
+      <strong>{{ result.weak_planet }} Influence – Weak {{ result.weak_planet }}</strong> <strong>Healing Offering:</strong>
       Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
       to gently balance {{ result.weak_planet }}’s diminished influence.
       {{ result.weak_healing_message }}
