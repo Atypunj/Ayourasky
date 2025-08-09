@@ -762,6 +762,10 @@ def index():
             anta_frag = anta_frag.split('(')[1].rstrip(')')
 
         # ✅ Final return with all values passed
+        result["mahadasha_frag_linked"]  = _linkify(get_fragrance_for_weak_planet(result["mahadasha"]))
+        result["antardasha_frag_linked"] = _linkify(get_fragrance_for_weak_planet(result["antardasha"]))
+        result["weak_fragrance_linked"]  = _linkify(result.get("weak_fragrance", ""))
+
         return render_template("blessings_result_final.html", result=result, maha_frag=maha_frag, anta_frag=anta_frag)
 
     
