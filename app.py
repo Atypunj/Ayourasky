@@ -718,6 +718,7 @@ def index():
             result["random_elemental_insight"] = None
     
         add_elemental_blessing(result)
+        result["fragrance_inspired_name_linked"] = _linkify(result.get("fragrance_inspired_name", ""))
         key = f"{mahadasha_lord}_{antardasha_lord}".title()
         result["dasha_guidance"] = DASHA_GUIDANCE.get(key, "Guidance not available.")
         result['weak_planet'] = get_weak_planet_from_chart(chart, dasha_planets)
