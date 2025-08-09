@@ -73,12 +73,10 @@
   </p>
   <p><strong>🧭 Guidance:</strong> {{ result.dasha_guidance }}</p>
 
-  <p><strong>🔹 Elemental Fragrance:</strong>
-    <a href="{{ result.fragrance_url }}" target="_blank" style="color: #384C65; text-decoration: none; font-weight: bold;">
-      {{ result.fragrance_inspired_name_linked | safe }}
-    </a><br>
+ <p><strong>🔹 Elemental Fragrance:</strong>
+    {{ result.fragrance_inspired_name_linked | safe }}<br>
     <em>A water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
-  </p>
+</p>
 
   <p><strong>🔥 Mahadasha Healing Offering:</strong> You should offer <strong>{{ maha_frag | safe }}</strong> in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}. This ritual grounds intensity and fosters clarity. You may dedicate this offering to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong>. <em>This is more than a scent — it’s a doorway. Let {{ maha_frag }} anchor your transformation from this moment on.</em></p>
 
