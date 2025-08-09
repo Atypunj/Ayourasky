@@ -5,9 +5,7 @@ import random
 loaded = False
 FRAGRANCE_LINKS = {}
 for _fname in [
-    'fragrance_links.fixed.json',
-    'fragrance_links (1).json',
-    'fragrance_links.json'
+    'fragrance_links.fixed.json'
 ]:
     try:
         with open(_fname, 'r', encoding='utf-8') as _fl:
