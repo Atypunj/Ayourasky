@@ -46,14 +46,13 @@
     You should offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
     in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}.
     This ritual grounds intensity and fosters clarity. You may dedicate this offering to
-    <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong>.
-    <em>This is more than a scent — it’s a guiding fragrance, unlocking the inner realms where your true path awaits.</em>
+    Lord Hanuman or Lord Subramanya. This is more than a scent — it’s a guiding fragrance, unlocking the inner realms where your true path awaits.
   </p>
 
   <p><strong>🌙 Antardasha Healing Offering:</strong>
     Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
     in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul.
-    If a <strong>{{ result.antardasha }}</strong> idol — representing <strong>{{ result.offering_to }}</strong> — is unavailable,
+    If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
     invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> throughout the Antardasha which ends on {{ result.antardasha_end }}.
   </p>
 </div>
@@ -62,8 +61,8 @@
   {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
     <p>
       
-      <strong>{{ result.weak_planet }} Influence – Weak {{ result.weak_planet }}</strong> <strong>Healing Offering:</strong>
-      Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
+      <strong> Weak {{ result.weak_planet }} Healing Offering:</strong>
+      Offer <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
       to gently balance {{ result.weak_planet }}’s diminished influence.
       {{ result.weak_healing_message }}
       If you're feeling drained, directionless, or overly reactive, let this aroma ground your energy and restore inner strength through mindful application or prayer.
