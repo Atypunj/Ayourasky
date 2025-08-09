@@ -630,7 +630,34 @@ def index():
         now_dt = Datetime(now.strftime("%Y/%m/%d"), now.strftime("%H:%M"), "+05:30")
         now_chart = Chart(now_dt, pos)
         current_element, _ = calculate_dominant_element(now_chart, rahu_sign, ketu_sign)
-    
+        # --- Deterministic lunar-cycle lock for current_element (device-agnostic) ---
+# Approximate synodic month anchor near 2000-01-06 New Moon (JD ~ 2451550.1)
+SYNODIC_DAYS = 29.530588
+ANCHOR_JD = 2451550.1  # fixed anchor; do not change
+
+def jd_from_dt(dt):
+    return swe.julday(dt.year, dt.month, dt.day) + \
+           (dt.hour + dt.minute/60 + dt.second/3600) / 24.0
+
+try:
+    # 1) Find start of current lunar bucket
+    now_dt = datetime.datetime.utcnow()
+    now_jd = jd_from_dt(now_dt)
+    bucket_index = int((now_jd - ANCHOR_JD) // SYNODIC_DAYS)
+    bucket_start_jd = ANCHOR_JD + bucket_index * SYNODIC_DAYS
+
+    # 2) Build a chart at *bucket start* for user's place, then derive element once
+    by, bm, bd, but = swe.revjul(bucket_start_jd)  # returns (y, m, d, ut)
+    bucket_dt = Datetime(f"{by}/{bm:02d}/{bd:02d}",
+                         f"{int(but):02d}:{int((but % 1) * 60):02d}", "+05:30")
+    bucket_chart = Chart(bucket_dt, pos)
+    bucket_element, _ = calculate_dominant_element(bucket_chart, rahu_sign, ketu_sign)
+
+    # 3) Pin the current_element to this deterministic bucket value
+    current_element = bucket_element
+except Exception as e:
+    print("Lunar-cycle pinning failed:", e)
+
         # Interpretation
         derived_element = get_balanced_guidance(birth_element, current_element)
     
