@@ -25,31 +25,31 @@
 </p>
 
 <div class="section">
-  <h2>🔮 Elemental Profile</h2>
+  <h2> Elemental Profile</h2>
   <p>{{ result.elemental_intro | safe }}</p>
 </div>
 
 <div class="section">
-  <h2>🌌 Your Planetary Flow & 🌿 Fragrance-Led Ritual for Inner Balance</h2>
+  <h2> Your Planetary Flow &  Fragrance-Led Ritual for Inner Balance</h2>
 
   <p>
     <strong>Mahadasha:</strong> {{ result.mahadasha }} ({{ result.mahadasha_start }} – {{ result.mahadasha_end }}) &emsp;
     <strong>Antardasha:</strong> {{ result.antardasha }} ({{ result.antardasha_start }} – {{ result.antardasha_end }})
   </p>
-  <p><strong>🧭 Guidance:</strong> {{ result.dasha_guidance }}</p>
+  <p><strong> Guidance:</strong> {{ result.dasha_guidance }}</p>
 
-  <p><strong>🔹 Elemental Fragrance:</strong>
+  <p><strong> Elemental Fragrance:</strong>
     {{ result.fragrance_inspired_name_linked | safe }} <em>A water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
   </p>
 
-  <p><strong>🔥 Mahadasha Healing Offering:</strong>
+  <p><strong> Mahadasha Healing Offering:</strong>
     You should offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
     in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}.
     This ritual grounds intensity and fosters clarity. You may dedicate this offering to
     Lord Hanuman or Lord Subramanya. This is more than a scent — it’s a guiding fragrance, unlocking the inner realms where your true path awaits.
   </p>
 
-  <p><strong>🌙 Antardasha Healing Offering:</strong>
+  <p><strong> Antardasha Healing Offering:</strong>
     Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
     in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul.
     If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
