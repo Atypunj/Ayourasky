@@ -83,6 +83,9 @@
     border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20;
     background:linear-gradient(180deg,#fff,#fff8ed)}
   .as-cta:hover{color:#ae8b46}
+  .as-subtle-link{display:inline-block; margin-left:12px; font-size:14px; color:#6b7280;
+    border-bottom:1px solid rgba(0,0,0,.15); text-decoration:none}
+  .as-subtle-link:hover{color:#ae8b46; border-color:#ae8b46}
 
   .as-more{margin-top:10px}
   .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
@@ -107,7 +110,7 @@
       <header class="as-header">
         <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c-4.8-.6-10.2-3 13.6-7.8M9 48c-5.7.1-12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c-4.8-.6 10.2-3 13.6-7.8M9 48c-5.7.1 12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           <path d="M52 36c-3.5-1-8-3.6-10.5-8.2M54 42c-4.8-.6-10.2-3 13.6-7.8M55 48c-5.7.1-12.2-2.3-16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="as-kicker">Ayoura Sky • Signature Reading</div>
@@ -139,8 +142,15 @@
           <p><strong>Your need now:</strong> {{ result.derived_element }}</p>
           <p><strong>Your Remedy:</strong> {{ result.fragrance_inspired_name_linked | safe }} — a grounding fragrance that turns passion into purpose and intensity into clarity.</p>
 
-          <!-- CTA using the same link -->
-          <p><span class="as-cta">{{ result.fragrance_inspired_name_linked | safe }}</span></p>
+          <!-- CTA — Explore Blend -->
+          <p>
+            {% if result.fragrance_url %}
+              <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
+              <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            {% else %}
+              <span class="as-cta">{{ result.fragrance_inspired_name_linked | safe }}</span>
+            {% endif %}
+          </p>
 
           <!-- Read more toggle -->
           <div class="as-more">
@@ -191,6 +201,15 @@
             <li>Fosters clarity</li>
             <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
           </ul>
+
+          <!-- CTA — Add to Ritual -->
+          {% if result.mahadasha_frag_url %}
+            <p>
+              <a class="as-cta" href="{{ result.mahadasha_frag_url }}" target="_blank" rel="noopener">Add to Ritual</a>
+              <a class="as-subtle-link" href="{{ result.mahadasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            </p>
+          {% endif %}
+
           <div class="as-more">
             <button class="as-more-toggle" type="button"
               onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full details' : 'Read full details';">
@@ -218,6 +237,14 @@
             If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
             invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.antardasha_end }}</strong>.
           </p>
+
+          <!-- CTA — View Offering -->
+          {% if result.antardasha_frag_url %}
+            <p>
+              <a class="as-cta" href="{{ result.antardasha_frag_url }}" target="_blank" rel="noopener">View Offering</a>
+              <a class="as-subtle-link" href="{{ result.antardasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            </p>
+          {% endif %}
         </div>
 
         <div class="as-rule"></div>
@@ -236,25 +263,34 @@
               Balancing a Weak {{ result.weak_planet }}
             </h3>
             <p>
-              Offering <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
+              Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
               to gently balance {{ result.weak_planet }}’s diminished influence.
             </p>
             <ul class="as-bullets">
               <li>{{ result.weak_healing_message }}</li>
               <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
             </ul>
+
+            <!-- CTA — Experience {fragrance} -->
+            {% if result.weak_fragrance_url %}
+              <p>
+                <a class="as-cta" href="{{ result.weak_fragrance_url }}" target="_blank" rel="noopener">
+                  Experience {{ (result.weak_fragrance_linked or result.weak_fragrance) | striptags }}
+                </a>
+                <a class="as-subtle-link" href="{{ result.weak_fragrance_url }}#details" target="_blank" rel="noopener">
+                  Learn more about this blend
+                </a>
+              </p>
+            {% endif %}
           </div>
         {% else %}
           <p class="as-muted"><em>No weak planet fragrance guidance available at the moment.</em></p>
         {% endif %}
       </section>
 
-      <!-- Footer -->
+      <!-- Footer divider only (removed the sentence you didn't want) -->
       <section class="as-section">
         <div class="as-divider" style="max-width:360px">◆</div>
-        <p class="as-muted" style="text-align:center; margin-top:8px">
-          Fragrance names and URLs are rendered from your mapping. Links open in a new tab.
-        </p>
       </section>
 
     </article>
