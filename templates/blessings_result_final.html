@@ -5,53 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your Divine Blueprint</title>
 
-  <!-- Luxury skin CSS -->
+  <!-- Luxury skin + components -->
   <style>
   :root{
     --ink:#1b1d20; --sub:#3c434a; --paper:#fbfaf7; --card:#ffffff;
     --gold:#c5a25a; --golder:#ae8b46; --muted:#7a838c;
   }
-  .as-wrap{max-width:860px; margin:24px auto; padding:0 20px}
-  .as-card{
-    background:var(--card); border-radius:22px; padding:24px 28px 32px;
-    box-shadow:0 24px 48px rgba(0,0,0,.06); border:1px solid rgba(197,162,90,.25);
-    position:relative; overflow:hidden;
+
+  /* Page base */
+  html,body{height:100%}
+  body{
+    margin:0; background:radial-gradient(1400px 700px at 20% -10%, #fffdf7 0%, #f6f2e9 35%, #eee8dd 100%);
+    color:var(--ink);
+    font:16px/1.7 Georgia, "Times New Roman", serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
+
+  /* Wrapper + Card */
+  .as-wrap{max-width:860px; margin:28px auto; padding:0 20px}
+  .as-card{
+    position:relative; overflow:hidden;
+    background:var(--card); border-radius:22px; padding:26px 30px 34px;
+    box-shadow:0 24px 48px rgba(0,0,0,.06); border:1px solid rgba(197,162,90,.25);
+  }
+  /* Warm gilded wash */
   .as-card:before{
     content:""; position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(197,162,90,.18), rgba(197,162,90,0) 140px);
+    background:linear-gradient(180deg, rgba(197,162,90,.16), rgba(197,162,90,0) 160px);
     mix-blend-mode:multiply;
   }
-  .as-header{text-align:center; padding:8px 0 12px}
+  /* Subtle star speckles */
+  .as-card:after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+    background:
+      radial-gradient(1px 1px at 15% 25%, #bfa46a 50%, transparent 51%),
+      radial-gradient(1px 1px at 75% 35%, #bfa46a 50%, transparent 51%),
+      radial-gradient(1px 1px at 45% 70%, #bfa46a 50%, transparent 51%);
+  }
+
+  /* Header */
+  .as-header{text-align:center; padding:8px 0 14px}
+  .as-crest{width:72px; height:72px; margin:6px auto 8px; color:var(--gold)}
   .as-kicker{letter-spacing:.18em; text-transform:uppercase; font-size:12px; color:var(--golder)}
-  .as-title{font:600 34px/1.25 "Garamond","Georgia",serif; margin:8px 0 6px; color:var(--ink)}
+  .as-title{font:600 34px/1.25 "Garamond","Georgia",serif; margin:6px 0 8px; color:var(--ink)}
   .as-sub{color:var(--sub); font-size:15px}
   .as-divider{display:flex; align-items:center; gap:12px; justify-content:center; margin:20px auto 0; color:var(--gold)}
   .as-divider::before,.as-divider::after{content:""; height:1px; flex:1; background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
-  /* Optional polish for your existing content without changing tags */
+  /* Typography defaults inside card */
   .as-card h2{font:600 22px/1.35 "Garamond","Georgia",serif; color:var(--ink); margin:16px 0 8px}
-  .as-card p{margin:8px 0; color:#23262a; line-height:1.7}
+  .as-card p{margin:8px 0; color:#23262a; line-height:1.75}
   .as-muted{color:var(--muted)}
+  .as-section{margin:18px 0 8px}
+
+  /* Callout */
   .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
               background:linear-gradient(180deg,#fff,#fffaf0)}
+
+  /* Grid for dasha timings */
   .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
   .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
   .as-pill b{color:var(--golder)}
+
+  /* Links */
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
   .as-card a:hover{color:var(--golder)}
 
-  /* Your original base styles kept */
-  body { font-family: Georgia, serif; margin: 20px; line-height: 1.6; background: #fffdf6; }
-  h1, h2 { color: #384C65; }
-  .score-bar { background: #ddd; border-radius: 10px; overflow: hidden; width: 100%; height: 20px; margin-top: 5px; }
-  .score-fill { background: #6ab3a3; height: 100%; }
-  blockquote { background: #f9f9f9; border-left: 5px solid #ccc; padding: 10px; margin: 10px 0; font-style: italic; }
-  .section { margin-bottom: 30px; }
-  button { background-color: #384C65; color: white; border: none; cursor: pointer; padding: 10px 15px; border-radius: 5px; }
-  button:hover { background-color: #24415f; }
+  /* Ritual cards (like your screenshot) */
+  .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
+    background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
+  .as-ritual h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
+    font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
+  .as-ico{width:18px; height:18px; color:#ae8b46}
+  .as-bullets{margin:10px 0 8px; padding-left:20px}
+  .as-bullets li{margin:6px 0}
+  .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0;
+    background:linear-gradient(90deg, #fffef9, #ffffff)}
 
+  /* Section rule */
+  .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
+
+  /* Print */
   @media print{
+    body{background:#fff}
+    .as-wrap{margin:0; padding:0}
     .as-card{box-shadow:none; border:0; border-radius:0}
     .as-card a{color:#000; border-bottom:1px solid #000}
   }
@@ -59,74 +96,132 @@
 </head>
 <body>
 
-  <!-- BEGIN luxury wrapper -->
   <div class="as-wrap">
     <article class="as-card">
+
+      <!-- Classic crest (laurel + star) -->
       <header class="as-header">
+        <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c4.8-.6 10.2-3 13.6-7.8M9 48c5.7.1 12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M52 36c-3.5-1-8-3.6-10.5-8.2M54 42c-4.8-.6-10.2-3-13.6-7.8M55 48c-5.7.1-12.2-2.3-16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
         <div class="as-kicker">Ayoura Sky • Signature Reading</div>
         <h1 class="as-title">Your Divine Blueprint</h1>
         <div class="as-sub">Uniquely Aligned with the Cosmos</div>
         <div class="as-divider">◆</div>
       </header>
 
-      <!-- Your existing template content (unchanged bindings) -->
-      <div class="section">
+      <!-- Intro -->
+      <section class="as-section">
         <p>
           {{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}
         </p>
-      </div>
+      </section>
 
-      <div class="section">
+      <!-- Elemental Profile -->
+      <section class="as-section">
         <h2>Elemental Profile</h2>
-        <p>{{ result.elemental_intro | safe }}</p>
-      </div>
+        <div class="as-callout">
+          <p>{{ result.elemental_intro | safe }}</p>
+        </div>
+      </section>
 
-      <div class="section">
-        <h2>Your Planetary Flow &amp; Fragrance-Led Ritual for Inner Balance</h2>
+      <!-- Planetary Flow -->
+      <section class="as-section">
+        <h2>Planetary Flow &amp; Fragrance-Led Ritual</h2>
 
-        <p>
-          <strong>Mahadasha:</strong> {{ result.mahadasha }} ({{ result.mahadasha_start }} – {{ result.mahadasha_end }}) &emsp;
-          <strong>Antardasha:</strong> {{ result.antardasha }} ({{ result.antardasha_start }} – {{ result.antardasha_end }})
-        </p>
-        <p><strong>Guidance:</strong> {{ result.dasha_guidance }}</p>
+        <div class="as-grid">
+          <div class="as-pill"><b>Mahadasha:</b> {{ result.mahadasha }}
+            <span class="as-muted">({{ result.mahadasha_start }} – {{ result.mahadasha_end }})</span>
+          </div>
+          <div class="as-pill"><b>Antardasha:</b> {{ result.antardasha }}
+            <span class="as-muted">({{ result.antardasha_start }} – {{ result.antardasha_end }})</span>
+          </div>
+        </div>
 
-        <p><strong>Elemental Fragrance:</strong>
+        <p class="as-muted"><b>Guidance:</b> {{ result.dasha_guidance }}</p>
+
+        <p><b>Elemental Fragrance:</b>
           {{ result.fragrance_inspired_name_linked | safe }}
-          <em>A water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
+          <em>— a water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
         </p>
 
-        <p><strong>Mahadasha Healing Offering:</strong>
-          You should offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
-          in devotion to <strong>{{ result.mahadasha }}</strong> until {{ result.mahadasha_end }}.
-          This ritual grounds intensity and fosters clarity. You may dedicate this offering to
-          Lord Hanuman or Lord Subramanya. This is more than a scent — it’s a guiding fragrance, unlocking the inner realms where your true path awaits.
-        </p>
-
-        <p><strong>Antardasha Healing Offering:</strong>
-          Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
-          in reverence to <strong>{{ result.antardasha }}</strong> — soothing emotions, enhancing intuition, and nurturing the soul.
-          If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
-          invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> throughout the Antardasha which ends on {{ result.antardasha_end }}.
-        </p>
-      </div>
-
-      <div class="section">
-        {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
+        <!-- Mahadasha ritual card -->
+        <div class="as-ritual">
+          <h3>
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+            </svg>
+            Mahadasha Healing Offering
+          </h3>
           <p>
-            <strong>Weak {{ result.weak_planet }} Healing Offering:</strong>
-            Offer <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
-            to gently balance {{ result.weak_planet }}’s diminished influence.
-            {{ result.weak_healing_message }}
-            If you're feeling drained, directionless, or overly reactive, let this aroma ground your energy and restore inner strength through mindful application or prayer.
+            Offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
+            in devotion to <em>{{ result.mahadasha }}</em> until <strong>{{ result.mahadasha_end }}</strong>.
           </p>
+          <ul class="as-bullets">
+            <li>Grounds intensity</li>
+            <li>Fosters clarity</li>
+            <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
+          </ul>
+          <div class="as-note">
+            <p>This is more than a scent — it’s a <strong>guiding fragrance</strong>, unlocking the inner realms where your true path awaits.</p>
+          </div>
+        </div>
+
+        <!-- Antardasha ritual card -->
+        <div class="as-ritual">
+          <h3>
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+            </svg>
+            Antardasha Healing Offering
+          </h3>
+          <p>
+            Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
+            in reverence to <em>{{ result.antardasha }}</em>.
+            If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
+            invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.antardasha_end }}</strong>.
+          </p>
+        </div>
+
+        <div class="as-rule"></div>
+      </section>
+
+      <!-- Weak Planet -->
+      <section class="as-section">
+        {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
+          <div class="as-ritual">
+            <h3>
+              <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+              </svg>
+              Balancing a Weak {{ result.weak_planet }}
+            </h3>
+            <p>
+              Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
+              to gently balance {{ result.weak_planet }}’s diminished influence.
+            </p>
+            <ul class="as-bullets">
+              <li>{{ result.weak_healing_message }}</li>
+              <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
+            </ul>
+          </div>
         {% else %}
-          <p><em>No weak planet fragrance guidance available at the moment.</em></p>
+          <p class="as-muted"><em>No weak planet fragrance guidance available at the moment.</em></p>
         {% endif %}
-      </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="as-section">
+        <div class="as-divider" style="max-width:360px">◆</div>
+        <p class="as-muted" style="text-align:center; margin-top:8px">
+          Fragrance names and URLs are rendered from your mapping. Links open in a new tab.
+        </p>
+      </section>
 
     </article>
   </div>
-  <!-- END luxury wrapper -->
 
 </body>
 </html>
