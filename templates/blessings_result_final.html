@@ -60,7 +60,7 @@
   .as-pill b{color:var(--golder)}
 
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
-  .as-card a:hover{color:var(--golder)}
+  .as-card a:hover{color:#ae8b46}
 
   /* Ritual / mini cards */
   .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
@@ -93,6 +93,40 @@
 
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
+  /* --- Gift / Need innovations --- */
+  .gift-box,.need-box{
+    border:1px solid rgba(197,162,90,.45);
+    border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7);
+    margin:12px 0;
+  }
+  .gift-icon{display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:999px; margin-right:8px;
+    border:1px solid rgba(197,162,90,.55); color:#ae8b46; font-size:14px;
+    background:linear-gradient(180deg,#fff,#fff6e6);}
+  .gift-box p{margin:6px 0;}
+  .gift-affirm{font-style:italic; color:#6b7280; margin-top:6px}
+
+  .need-header{display:flex; align-items:center; gap:8px; margin-bottom:8px; font-weight:600}
+  .element-air,.element-fire,.element-earth,.element-water,.element-ether{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px;
+    border:1px solid rgba(197,162,90,.45); background:#fffdf7; font-size:13px
+  }
+  .vs{opacity:.6}
+  .energy-bar{height:8px; border-radius:999px; overflow:hidden; background:#f1eee7; margin:8px 0 10px}
+  .bar-left{height:100%; float:left; background:linear-gradient(90deg,#e7f2ff,#d7ebff)}
+  .bar-right{height:100%; float:right; background:linear-gradient(90deg,#ffd9c7,#ffc9b1)}
+
+  /* Chips & steps (from earlier file) */
+  .as-chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
+  .as-chip{font-size:12px; padding:6px 10px; border:1px solid rgba(197,162,90,.45);
+    border-radius:999px; background:#fffdf7}
+  .as-badge{display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+    border:1px solid rgba(197,162,90,.6); border-radius:999px; background:linear-gradient(180deg,#fff,#fffaf0);
+    font-weight:600}
+  .as-badge svg{width:16px; height:16px; color:#ae8b46}
+  .as-steps{margin:10px 0 0; padding-left:18px}
+  .as-steps li{margin:6px 0}
+
   @media print{
     body{background:#fff}
     .as-wrap{margin:0; padding:0}
@@ -124,7 +158,7 @@
         <p>{{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}</p>
       </section>
 
-      <!-- Elemental Profile (compact + expandable) -->
+      <!-- Elemental Profile (encapsulated + innovative Gift/Need + non-linked remedy) -->
       <section class="as-section">
         <h2>Elemental Profile</h2>
 
@@ -136,23 +170,100 @@
               <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
               <path d="M7 14c2-1 4-1 6 0s4 1 6 0" stroke="currentColor" stroke-linecap="round"/>
             </svg>
-            Your Element at a Glance
+            Your {{ result.birth_element }} Element at a Glance
           </h3>
-          <p><strong>Your gift:</strong> From {{ result.birth_element }} you carry a native strength that shapes your presence.</p>
-          <p><strong>Your need now:</strong> {{ result.derived_element }}</p>
-          <p><strong>Your Remedy:</strong> {{ result.fragrance_inspired_name_linked | safe }} — a grounding fragrance that turns passion into purpose and intensity into clarity.</p>
 
-          <!-- CTA — Explore Blend -->
+          <!-- Gift -->
+          <div class="gift-box">
+            <div style="display:flex; align-items:flex-start;">
+              <span class="gift-icon" aria-hidden="true">✦</span>
+              <div>
+                <p><strong>Inherited Strength:</strong> From your <strong>{{ result.birth_element }}</strong> element, you are inherited with native strength that shapes your presence.</p>
+                <p class="gift-affirm">
+                  {% if result.birth_element == 'Air' %}Your Air spirit moves with clarity, connection, and curiosity.
+                  {% elif result.birth_element == 'Fire' %}Your Fire spirit moves with courage, drive, and transformation.
+                  {% elif result.birth_element == 'Water' %}Your Water spirit moves with empathy, intuition, and grace.
+                  {% elif result.birth_element == 'Earth' %}Your Earth spirit moves with steadiness, discernment, and devotion.
+                  {% else %}Your Ether spirit moves with vision, stillness, and quiet knowing.{% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Need -->
+          <div class="need-box">
+            <div class="need-header">
+              <span class="element-{{ result.birth_element | lower }}">🌬 {{ result.birth_element }}</span>
+              <span class="vs">→</span>
+              <span class="element-{{ result.current_element | lower }}">🔥 {{ result.current_element }}</span>
+            </div>
+
+            <!-- static split energy bar -->
+            <div class="energy-bar" role="presentation">
+              <div class="bar-left" style="width:50%"></div>
+              <div class="bar-right" style="width:50%"></div>
+            </div>
+
+            <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing <strong>{{ result.current_element }}</strong> influence, which can:</p>
+            <ul>
+              {% if result.current_element == 'Fire' %}
+                <li>Fuel bold action — but risk impulsivity when rushed.</li>
+                <li>Heighten emotional reactivity under stress.</li>
+                <li>Push transformation faster than your nervous system prefers.</li>
+              {% elif result.current_element == 'Air' %}
+                <li>Accelerate ideas — yet scatter focus across too many threads.</li>
+                <li>Increase overthinking and decision fatigue.</li>
+                <li>Favor speed over depth, diluting follow-through.</li>
+              {% elif result.current_element == 'Water' %}
+                <li>Deepen empathy — while blurring boundaries.</li>
+                <li>Amplify moods and nostalgia.</li>
+                <li>Slow momentum through rumination.</li>
+              {% elif result.current_element == 'Earth' %}
+                <li>Stabilize routines — but resist necessary change.</li>
+                <li>Over-index on caution and control.</li>
+                <li>Create heaviness or stagnation.</li>
+              {% else %}
+                <li>Expand vision — yet detach from practical steps.</li>
+                <li>Invite stillness that can drift into inaction.</li>
+                <li>Prefer the ethereal over the embodied.</li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <!-- Remedy (no hyperlink) + chips + micro-ritual -->
+          <p><strong>Your Remedy:</strong>
+            <span class="as-badge" aria-label="Recommended fragrance">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
+              </svg>
+              {{ result.fragrance_inspired_name | striptags }}
+            </span>
+            — a grounding fragrance that turns passion into purpose and intensity into clarity.
+          </p>
+
+          <div class="as-chips">
+            <span class="as-chip">Centers breath &amp; focus</span>
+            <span class="as-chip">Softens reactivity</span>
+            <span class="as-chip">Guides action with calm</span>
+          </div>
+
+          <ol class="as-steps">
+            <li>Apply lightly to wrists &amp; heart center.</li>
+            <li>Close eyes for 3 slow breaths (4-4-6 count).</li>
+            <li>Hold one intention; release on the exhale.</li>
+          </ol>
+
+          <!-- CTA — Explore Blend + Learn more (uses plain URL when available) -->
           <p>
             {% if result.fragrance_url %}
               <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
               <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
             {% else %}
-              <span class="as-cta">{{ result.fragrance_inspired_name_linked | safe }}</span>
+              <span class="as-cta">{{ result.fragrance_inspired_name | striptags }}</span>
             {% endif %}
           </p>
 
-          <!-- Read more toggle -->
+          <!-- Read more toggle (long-form copy) -->
           <div class="as-more">
             <button class="as-more-toggle" type="button"
               onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">
@@ -182,10 +293,9 @@
 
         <p class="as-muted"><b>Guidance:</b> {{ result.dasha_guidance }}</p>
 
-        <!-- Mahadasha ritual card (compact + expand) -->
+        <!-- Mahadasha ritual card -->
         <div class="as-ritual">
           <h3>
-            <!-- Planet icon -->
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
               <path d="M3 12c4-3 14-3 18 0" stroke="currentColor" stroke-linecap="round"/>
@@ -202,7 +312,6 @@
             <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
           </ul>
 
-          <!-- CTA — Add to Ritual -->
           {% if result.mahadasha_frag_url %}
             <p>
               <a class="as-cta" href="{{ result.mahadasha_frag_url }}" target="_blank" rel="noopener">Add to Ritual</a>
@@ -221,10 +330,9 @@
           </div>
         </div>
 
-        <!-- Antardasha ritual card (compact + expand) -->
+        <!-- Antardasha ritual card -->
         <div class="as-ritual">
           <h3>
-            <!-- Planet icon variant -->
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
               <path d="M6 9c4 2 8 2 12 0" stroke="currentColor" stroke-linecap="round"/>
@@ -238,7 +346,6 @@
             invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.antardasha_end }}</strong>.
           </p>
 
-          <!-- CTA — View Offering -->
           {% if result.antardasha_frag_url %}
             <p>
               <a class="as-cta" href="{{ result.antardasha_frag_url }}" target="_blank" rel="noopener">View Offering</a>
@@ -255,7 +362,6 @@
         {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
           <div class="as-ritual">
             <h3>
-              <!-- Sun/Moon/star composite icon -->
               <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="5.5" stroke="currentColor"/>
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1"/>
@@ -271,7 +377,6 @@
               <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
             </ul>
 
-            <!-- CTA — Experience {fragrance} -->
             {% if result.weak_fragrance_url %}
               <p>
                 <a class="as-cta" href="{{ result.weak_fragrance_url }}" target="_blank" rel="noopener">
@@ -288,7 +393,7 @@
         {% endif %}
       </section>
 
-      <!-- Footer divider only (removed the sentence you didn't want) -->
+      <!-- Footer divider only -->
       <section class="as-section">
         <div class="as-divider" style="max-width:360px">◆</div>
       </section>
