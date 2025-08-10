@@ -12,7 +12,6 @@
     --gold:#c5a25a; --golder:#ae8b46; --muted:#7a838c;
   }
 
-  /* Page base */
   html,body{height:100%}
   body{
     margin:0; background:radial-gradient(1400px 700px at 20% -10%, #fffdf7 0%, #f6f2e9 35%, #eee8dd 100%);
@@ -21,20 +20,17 @@
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
 
-  /* Wrapper + Card */
   .as-wrap{max-width:860px; margin:28px auto; padding:0 20px}
   .as-card{
     position:relative; overflow:hidden;
     background:var(--card); border-radius:22px; padding:26px 30px 34px;
     box-shadow:0 24px 48px rgba(0,0,0,.06); border:1px solid rgba(197,162,90,.25);
   }
-  /* Warm gilded wash */
   .as-card:before{
     content:""; position:absolute; inset:0; pointer-events:none;
     background:linear-gradient(180deg, rgba(197,162,90,.16), rgba(197,162,90,0) 160px);
     mix-blend-mode:multiply;
   }
-  /* Subtle star speckles */
   .as-card:after{
     content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
     background:
@@ -43,7 +39,6 @@
       radial-gradient(1px 1px at 45% 70%, #bfa46a 50%, transparent 51%);
   }
 
-  /* Header */
   .as-header{text-align:center; padding:8px 0 14px}
   .as-crest{width:72px; height:72px; margin:6px auto 8px; color:var(--gold)}
   .as-kicker{letter-spacing:.18em; text-transform:uppercase; font-size:12px; color:var(--golder)}
@@ -52,29 +47,28 @@
   .as-divider{display:flex; align-items:center; gap:12px; justify-content:center; margin:20px auto 0; color:var(--gold)}
   .as-divider::before,.as-divider::after{content:""; height:1px; flex:1; background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
-  /* Typography defaults inside card */
   .as-card h2{font:600 22px/1.35 "Garamond","Georgia",serif; color:var(--ink); margin:16px 0 8px}
   .as-card p{margin:8px 0; color:#23262a; line-height:1.75}
   .as-muted{color:var(--muted)}
   .as-section{margin:18px 0 8px}
 
-  /* Callout */
   .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
               background:linear-gradient(180deg,#fff,#fffaf0)}
 
-  /* Grid for dasha timings */
   .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
   .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
   .as-pill b{color:var(--golder)}
 
-  /* Links */
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
   .as-card a:hover{color:var(--golder)}
 
-  /* Ritual cards (like your screenshot) */
+  /* Ritual / mini cards */
   .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
-  .as-ritual h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
+  .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px;
+    background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
+
+  .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
     font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
   .as-ico{width:18px; height:18px; color:#ae8b46}
   .as-bullets{margin:10px 0 8px; padding-left:20px}
@@ -82,10 +76,20 @@
   .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0;
     background:linear-gradient(90deg, #fffef9, #ffffff)}
 
-  /* Section rule */
+  .as-tag{display:inline-block; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:#ae8b46; background:#fff8ea; border:1px solid rgba(197,162,90,.35);
+    padding:4px 8px; border-radius:999px; margin-bottom:10px}
+  .as-cta{display:inline-block; margin-top:8px; padding:10px 16px; border-radius:999px;
+    border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20;
+    background:linear-gradient(180deg,#fff,#fff8ed)}
+  .as-cta:hover{color:#ae8b46}
+
+  .as-more{margin-top:10px}
+  .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
+  .as-hidden{display:none}
+
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
-  /* Print */
   @media print{
     body{background:#fff}
     .as-wrap{margin:0; padding:0}
@@ -103,8 +107,8 @@
       <header class="as-header">
         <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c4.8-.6 10.2-3 13.6-7.8M9 48c5.7.1 12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M52 36c-3.5-1-8-3.6-10.5-8.2M54 42c-4.8-.6-10.2-3-13.6-7.8M55 48c-5.7.1-12.2-2.3-16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c-4.8-.6-10.2-3 13.6-7.8M9 48c-5.7.1-12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M52 36c-3.5-1-8-3.6-10.5-8.2M54 42c-4.8-.6-10.2-3 13.6-7.8M55 48c-5.7.1-12.2-2.3-16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="as-kicker">Ayoura Sky • Signature Reading</div>
         <h1 class="as-title">Your Divine Blueprint</h1>
@@ -114,16 +118,42 @@
 
       <!-- Intro -->
       <section class="as-section">
-        <p>
-          {{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}
-        </p>
+        <p>{{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}</p>
       </section>
 
-      <!-- Elemental Profile -->
+      <!-- Elemental Profile (compact + expandable) -->
       <section class="as-section">
         <h2>Elemental Profile</h2>
-        <div class="as-callout">
-          <p>{{ result.elemental_intro | safe }}</p>
+
+        <div class="as-mini">
+          <div class="as-tag">{{ result.birth_element }} soul • Current: {{ result.current_element }}</div>
+          <h3>
+            <!-- Element glyph -->
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M7 14c2-1 4-1 6 0s4 1 6 0" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+            Your Element at a Glance
+          </h3>
+          <p><strong>Your gift:</strong> From {{ result.birth_element }} you carry a native strength that shapes your presence.</p>
+          <p><strong>Your need now:</strong> {{ result.derived_element }}</p>
+          <p><strong>Your Remedy:</strong> {{ result.fragrance_inspired_name_linked | safe }} — a grounding fragrance that turns passion into purpose and intensity into clarity.</p>
+
+          <!-- CTA using the same link -->
+          <p><span class="as-cta">{{ result.fragrance_inspired_name_linked | safe }}</span></p>
+
+          <!-- Read more toggle -->
+          <div class="as-more">
+            <button class="as-more-toggle" type="button"
+              onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">
+              Read full insight
+            </button>
+            <div class="as-hidden">
+              <div class="as-callout" style="margin-top:10px">
+                <p>{{ result.elemental_intro | safe }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -142,16 +172,13 @@
 
         <p class="as-muted"><b>Guidance:</b> {{ result.dasha_guidance }}</p>
 
-        <p><b>Elemental Fragrance:</b>
-          {{ result.fragrance_inspired_name_linked | safe }}
-          <em>— a water-aligned essence for emotional clarity, inner calm, and graceful flow.</em>
-        </p>
-
-        <!-- Mahadasha ritual card -->
+        <!-- Mahadasha ritual card (compact + expand) -->
         <div class="as-ritual">
           <h3>
+            <!-- Planet icon -->
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M3 12c4-3 14-3 18 0" stroke="currentColor" stroke-linecap="round"/>
             </svg>
             Mahadasha Healing Offering
           </h3>
@@ -164,16 +191,24 @@
             <li>Fosters clarity</li>
             <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
           </ul>
-          <div class="as-note">
-            <p>This is more than a scent — it’s a <strong>guiding fragrance</strong>, unlocking the inner realms where your true path awaits.</p>
+          <div class="as-more">
+            <button class="as-more-toggle" type="button"
+              onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full details' : 'Read full details';">
+              Read full details
+            </button>
+            <div class="as-hidden">
+              <div class="as-note"><p>This is more than a scent — it’s a <strong>guiding fragrance</strong>, unlocking the inner realms where your true path awaits.</p></div>
+            </div>
           </div>
         </div>
 
-        <!-- Antardasha ritual card -->
+        <!-- Antardasha ritual card (compact + expand) -->
         <div class="as-ritual">
           <h3>
+            <!-- Planet icon variant -->
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M6 9c4 2 8 2 12 0" stroke="currentColor" stroke-linecap="round"/>
             </svg>
             Antardasha Healing Offering
           </h3>
@@ -193,8 +228,10 @@
         {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
           <div class="as-ritual">
             <h3>
+              <!-- Sun/Moon/star composite icon -->
               <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 3l2 5 5 .5-4 3.3 1.2 5.2L12 15.4 7.8 17l1.2-5.2L5 8.5 10 8l2-5z" stroke="currentColor"/>
+                <circle cx="12" cy="12" r="5.5" stroke="currentColor"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1"/>
               </svg>
               Balancing a Weak {{ result.weak_planet }}
             </h3>
