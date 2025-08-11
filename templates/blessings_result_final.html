@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your Divine Blueprint</title>
 
+  <!-- Luxury skin + components -->
   <style>
   :root{
     --ink:#1b1d20; --sub:#3c434a; --paper:#fbfaf7; --card:#ffffff;
@@ -51,38 +52,86 @@
   .as-muted{color:var(--muted)}
   .as-section{margin:18px 0 8px}
 
-  /* Mini (encapsulated profile box) */
+  .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
+              background:linear-gradient(180deg,#fff,#fffaf0)}
+
+  .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
+  .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
+  .as-pill b{color:var(--golder)}
+
+  .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
+  .as-card a:hover{color:#ae8b46}
+
+  /* Ritual / mini cards */
+  .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
+    background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
   .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
 
-  /* Sub-sections inside the box */
-  .gift-box,.need-box,.remedy-box{
-    border:1px solid rgba(197,162,90,.35);
-    border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffef7);
+  .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
+    font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
+  .as-ico{width:18px; height:18px; color:#ae8b46}
+  .as-bullets{margin:10px 0 8px; padding-left:20px}
+  .as-bullets li{margin:6px 0}
+  .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0;
+    background:linear-gradient(90deg, #fffef9, #ffffff)}
+
+  .as-tag{display:inline-block; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:#ae8b46; background:#fff8ea; border:1px solid rgba(197,162,90,.35);
+    padding:4px 8px; border-radius:999px; margin-bottom:10px}
+  .as-cta{display:inline-block; margin-top:8px; padding:10px 16px; border-radius:999px;
+    border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20;
+    background:linear-gradient(180deg,#fff,#fff8ed)}
+  .as-cta:hover{color:#ae8b46}
+  .as-subtle-link{display:inline-block; margin-left:12px; font-size:14px; color:#6b7280;
+    border-bottom:1px solid rgba(0,0,0,.15); text-decoration:none}
+  .as-subtle-link:hover{color:#ae8b46; border-color:#ae8b46}
+
+  .as-more{margin-top:10px}
+  .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
+  .as-hidden{display:none}
+
+  .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
+
+  /* --- Gift / Need innovations --- */
+  .gift-box,.need-box{
+    border:1px solid rgba(197,162,90,.45);
+    border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7);
     margin:12px 0;
   }
-  .gift-title,.need-title,.remedy-title{
-    display:flex; align-items:center; gap:8px; margin:0 0 6px;
-    font:600 16px/1.35 "Garamond","Georgia",serif;
-  }
-  .gift-title:before{content:"✦"; color:#ae8b46; font-size:14px}
-  .need-title:before{content:"☉"; color:#ae8b46; font-size:14px}
-  .remedy-title:before{content:"⟡"; color:#ae8b46; font-size:14px}
+  .gift-icon{display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:999px; margin-right:8px;
+    border:1px solid rgba(197,162,90,.55); color:#ae8b46; font-size:14px;
+    background:linear-gradient(180deg,#fff,#fff6e6);}
+  .gift-box p{margin:6px 0;}
+  .gift-affirm{font-style:italic; color:#6b7280; margin-top:6px}
 
-  /* Badge-style fragrance name (not a link) */
-  .as-badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
-    border:1px solid rgba(197,162,90,.6); border-radius:999px; background:linear-gradient(180deg,#fff,#fffaf0);
-    font-weight:600; margin-right:6px}
-  .as-chips{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
+  .need-header{display:flex; align-items:center; gap:8px; margin-bottom:8px; font-weight:600}
+  .element-air,.element-fire,.element-earth,.element-water,.element-ether{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px;
+    border:1px solid rgba(197,162,90,.45); background:#fffdf7; font-size:13px
+  }
+  .vs{opacity:.6}
+  .energy-bar{height:8px; border-radius:999px; overflow:hidden; background:#f1eee7; margin:8px 0 10px}
+  .bar-left{height:100%; float:left; background:linear-gradient(90deg,#e7f2ff,#d7ebff)}
+  .bar-right{height:100%; float:right; background:linear-gradient(90deg,#ffd9c7,#ffc9b1)}
+
+  /* Chips & steps (from earlier file) */
+  .as-chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
   .as-chip{font-size:12px; padding:6px 10px; border:1px solid rgba(197,162,90,.45);
     border-radius:999px; background:#fffdf7}
-
-  /* Remove unused visual elements’ CSS (kept minimal) */
+  .as-badge{display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+    border:1px solid rgba(197,162,90,.6); border-radius:999px; background:linear-gradient(180deg,#fff,#fffaf0);
+    font-weight:600}
+  .as-badge svg{width:16px; height:16px; color:#ae8b46}
+  .as-steps{margin:10px 0 0; padding-left:18px}
+  .as-steps li{margin:6px 0}
 
   @media print{
     body{background:#fff}
     .as-wrap{margin:0; padding:0}
     .as-card{box-shadow:none; border:0; border-radius:0}
+    .as-card a{color:#000; border-bottom:1px solid #000}
   }
   </style>
 </head>
@@ -91,11 +140,11 @@
   <div class="as-wrap">
     <article class="as-card">
 
-      <!-- Header -->
+      <!-- Classic crest (laurel + star) -->
       <header class="as-header">
         <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c-4.8-.6 10.2-3 13.6-7.8M9 48c-5.7.1-12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 36c3.5-1 8-3.6 10.5-8.2M10 42c-4.8-.6 10.2-3 13.6-7.8M9 48c-5.7.1 12.2-2.3 16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           <path d="M52 36c-3.5-1-8-3.6-10.5-8.2M54 42c-4.8-.6-10.2-3 13.6-7.8M55 48c-5.7.1-12.2-2.3-16.4-7.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="as-kicker">Ayoura Sky • Signature Reading</div>
@@ -109,25 +158,53 @@
         <p>{{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}</p>
       </section>
 
-      <!-- Elemental Profile (everything inside one box) -->
+      <!-- Elemental Profile (encapsulated + innovative Gift/Need + non-linked remedy) -->
       <section class="as-section">
         <h2>Elemental Profile</h2>
 
         <div class="as-mini">
+          <div class="as-tag">{{ result.birth_element }} soul • Current: {{ result.current_element }}</div>
+          <h3>
+            <!-- Element glyph -->
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M7 14c2-1 4-1 6 0s4 1 6 0" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+            Your {{ result.birth_element }} Element at a Glance
+          </h3>
 
-          <!-- 1) Combined Gift line (replaces header + old gift copy) -->
+          <!-- Gift -->
           <div class="gift-box">
-            <div class="gift-title">Inherited Strength</div>
-            <p>
-              Your <strong>{{ result.birth_element }}</strong> Element is powered with native strength that
-              shapes your presence, which makes you move with clarity, connection, and curiosity.
-            </p>
+            <div style="display:flex; align-items:flex-start;">
+              <span class="gift-icon" aria-hidden="true">✦</span>
+              <div>
+                <p><strong>Inherited Strength:</strong> From your <strong>{{ result.birth_element }}</strong> element, you are inherited with native strength that shapes your presence.</p>
+                <p class="gift-affirm">
+                  {% if result.birth_element == 'Air' %}Your Air spirit moves with clarity, connection, and curiosity.
+                  {% elif result.birth_element == 'Fire' %}Your Fire spirit moves with courage, drive, and transformation.
+                  {% elif result.birth_element == 'Water' %}Your Water spirit moves with empathy, intuition, and grace.
+                  {% elif result.birth_element == 'Earth' %}Your Earth spirit moves with steadiness, discernment, and devotion.
+                  {% else %}Your Ether spirit moves with vision, stillness, and quiet knowing.{% endif %}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <!-- 2) Need (no Air→Fire chips, no energy bar) -->
+          <!-- Need -->
           <div class="need-box">
-            <div class="need-title">Planetary Shift</div>
-            <p>As per planetary calculations, you’re currently experiencing <strong>{{ result.current_element }}</strong> influence, which can:</p>
+            <div class="need-header">
+              <span class="element-{{ result.birth_element | lower }}">🌬 {{ result.birth_element }}</span>
+              <span class="vs">→</span>
+              <span class="element-{{ result.current_element | lower }}">🔥 {{ result.current_element }}</span>
+            </div>
+
+            <!-- static split energy bar -->
+            <div class="energy-bar" role="presentation">
+              <div class="bar-left" style="width:50%"></div>
+              <div class="bar-right" style="width:50%"></div>
+            </div>
+
+            <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing <strong>{{ result.current_element }}</strong> influence, which can:</p>
             <ul>
               {% if result.current_element == 'Fire' %}
                 <li>Fuel bold action — but risk impulsivity when rushed.</li>
@@ -153,29 +230,41 @@
             </ul>
           </div>
 
-          <!-- 3) Elemental Oil (inside the same box) -->
-          <div class="remedy-box">
-            <div class="remedy-title">Elemental Oil</div>
-            <p>
-              <span class="as-badge">{{ result.fragrance_inspired_name | striptags }}</span>
-              — a grounding fragrance that turns passion into purpose and intensity into clarity.
-            </p>
+          <!-- Remedy (no hyperlink) + chips + micro-ritual -->
+          <p><strong>Your Remedy:</strong>
+            <span class="as-badge" aria-label="Recommended fragrance">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
+              </svg>
+              {{ result.fragrance_inspired_name | striptags }}
+            </span>
+            — a grounding fragrance that turns passion into purpose and intensity into clarity.
+          </p>
 
-            <div class="as-chips">
-              <span class="as-chip">Centers breath &amp; focus</span>
-              <span class="as-chip">Softens reactivity</span>
-              <span class="as-chip">Guides action with calm</span>
-            </div>
-
-            <ol style="margin-top:8px; padding-left:18px">
-              <li>Apply lightly to wrists &amp; heart center.</li>
-              <li>Close eyes for 3 slow breaths (4-4-6 count).</li>
-              <li>Hold one intention; release on the exhale.</li>
-            </ol>
+          <div class="as-chips">
+            <span class="as-chip">Centers breath &amp; focus</span>
+            <span class="as-chip">Softens reactivity</span>
+            <span class="as-chip">Guides action with calm</span>
           </div>
 
-          <!-- Optional long-form insight toggle kept, still inside the same box -->
-          <div style="margin-top:8px">
+          <ol class="as-steps">
+            <li>Apply lightly to wrists &amp; heart center.</li>
+            <li>Close eyes for 3 slow breaths (4-4-6 count).</li>
+            <li>Hold one intention; release on the exhale.</li>
+          </ol>
+
+          <!-- CTA — Explore Blend + Learn more (uses plain URL when available) -->
+          <p>
+            {% if result.fragrance_url %}
+              <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
+              <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            {% else %}
+              <span class="as-cta">{{ result.fragrance_inspired_name | striptags }}</span>
+            {% endif %}
+          </p>
+
+          <!-- Read more toggle (long-form copy) -->
+          <div class="as-more">
             <button class="as-more-toggle" type="button"
               onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">
               Read full insight
@@ -186,11 +275,10 @@
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- Planetary Flow (unchanged) -->
+      <!-- Planetary Flow -->
       <section class="as-section">
         <h2>Planetary Flow &amp; Fragrance-Led Ritual</h2>
 
@@ -205,8 +293,15 @@
 
         <p class="as-muted"><b>Guidance:</b> {{ result.dasha_guidance }}</p>
 
+        <!-- Mahadasha ritual card -->
         <div class="as-ritual">
-          <h3>Mahadasha Healing Offering</h3>
+          <h3>
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M3 12c4-3 14-3 18 0" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+            Mahadasha Healing Offering
+          </h3>
           <p>
             Offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
             in devotion to <em>{{ result.mahadasha }}</em> until <strong>{{ result.mahadasha_end }}</strong>.
@@ -216,26 +311,63 @@
             <li>Fosters clarity</li>
             <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
           </ul>
+
+          {% if result.mahadasha_frag_url %}
+            <p>
+              <a class="as-cta" href="{{ result.mahadasha_frag_url }}" target="_blank" rel="noopener">Add to Ritual</a>
+              <a class="as-subtle-link" href="{{ result.mahadasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            </p>
+          {% endif %}
+
+          <div class="as-more">
+            <button class="as-more-toggle" type="button"
+              onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full details' : 'Read full details';">
+              Read full details
+            </button>
+            <div class="as-hidden">
+              <div class="as-note"><p>This is more than a scent — it’s a <strong>guiding fragrance</strong>, unlocking the inner realms where your true path awaits.</p></div>
+            </div>
+          </div>
         </div>
 
+        <!-- Antardasha ritual card -->
         <div class="as-ritual">
-          <h3>Antardasha Healing Offering</h3>
+          <h3>
+            <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
+              <path d="M6 9c4 2 8 2 12 0" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+            Antardasha Healing Offering
+          </h3>
           <p>
             Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
             in reverence to <em>{{ result.antardasha }}</em>.
             If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
             invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.antardasha_end }}</strong>.
           </p>
+
+          {% if result.antardasha_frag_url %}
+            <p>
+              <a class="as-cta" href="{{ result.antardasha_frag_url }}" target="_blank" rel="noopener">View Offering</a>
+              <a class="as-subtle-link" href="{{ result.antardasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+            </p>
+          {% endif %}
         </div>
 
         <div class="as-rule"></div>
       </section>
 
-      <!-- Weak Planet (unchanged) -->
+      <!-- Weak Planet -->
       <section class="as-section">
         {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
           <div class="as-ritual">
-            <h3>Balancing a Weak {{ result.weak_planet }}</h3>
+            <h3>
+              <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="5.5" stroke="currentColor"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1"/>
+              </svg>
+              Balancing a Weak {{ result.weak_planet }}
+            </h3>
             <p>
               Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
               to gently balance {{ result.weak_planet }}’s diminished influence.
@@ -244,12 +376,24 @@
               <li>{{ result.weak_healing_message }}</li>
               <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
             </ul>
+
+            {% if result.weak_fragrance_url %}
+              <p>
+                <a class="as-cta" href="{{ result.weak_fragrance_url }}" target="_blank" rel="noopener">
+                  Experience {{ (result.weak_fragrance_linked or result.weak_fragrance) | striptags }}
+                </a>
+                <a class="as-subtle-link" href="{{ result.weak_fragrance_url }}#details" target="_blank" rel="noopener">
+                  Learn more about this blend
+                </a>
+              </p>
+            {% endif %}
           </div>
         {% else %}
           <p class="as-muted"><em>No weak planet fragrance guidance available at the moment.</em></p>
         {% endif %}
       </section>
 
+      <!-- Footer divider only -->
       <section class="as-section">
         <div class="as-divider" style="max-width:360px">◆</div>
       </section>
