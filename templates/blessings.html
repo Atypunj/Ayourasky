@@ -20,7 +20,7 @@
       display:grid; place-items:start center;
       background:#0e1220; /* fallback if video fails */
     }
-    /* Background video */
+    /* Background video (replace src with your path) */
     .bg-video{
       position:fixed; inset:0; width:100%; height:100%; object-fit:cover; z-index:-3;
       filter:saturate(1.05) contrast(1.05) brightness(.9);
@@ -44,7 +44,7 @@
       animation:drift linear infinite; opacity:.8; filter:drop-shadow(0 0 6px rgba(255,255,255,.7))}
     @keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-10vh)}}
 
-    /* ====== Header (as per ref) ====== */
+    /* ====== Header ====== */
     header{ position:relative; z-index:2; text-align:center; padding:32px 16px 8px; }
     .eyebrow{ color:#cfd7ff; letter-spacing:.22em; font-size:.78rem; text-transform:uppercase; }
     h1{ font-family:'Playfair Display',serif; font-weight:700; line-height:1.12; margin:.35rem auto 0; max-width:30ch; color:#f6f7fb; }
@@ -68,16 +68,17 @@
     label{ display:block; font-weight:600; color:#223049; margin:6px 0 8px; font-size:.92rem; }
     .field{ position:relative; }
 
-    /* Text / Select */
+    /* Text / Select (reserve space for left icon) */
     .field input[type="text"], .field select{
       width:100%; appearance:none; border:1px solid #d5dbea; background:#fff; color:#0f1627;
-      border-radius:14px; padding:14px 14px 14px 44px; font-size:15px; box-shadow:0 8px 18px rgba(16,24,40,.04);
+      border-radius:14px; padding:14px 14px 14px 46px; /* 16 left + 18 icon + 12 gap */
+      font-size:15px; box-shadow:0 8px 18px rgba(16,24,40,.04);
       transition:border .15s ease, box-shadow .15s ease, transform .06s ease; outline:none;
     }
-    /* Date / Time keep native right icons */
+    /* Date / Time keep native right icons; no left icon */
     .field input[type="date"], .field input[type="time"]{
       width:100%; appearance:auto; -webkit-appearance:auto; border:1px solid #d5dbea; background:#fff; color:#0f1627;
-      border-radius:14px; padding:14px 40px 14px 14px; /* no left icon space */
+      border-radius:14px; padding:14px 40px 14px 14px;
       font-size:15px; box-shadow:0 8px 18px rgba(16,24,40,.04);
       transition:border .15s ease, box-shadow .15s ease, transform .06s ease; outline:none;
     }
@@ -85,8 +86,21 @@
     input[type="date"]::-webkit-calendar-picker-indicator,
     input[type="time"]::-webkit-calendar-picker-indicator{ opacity:1; cursor:pointer; }
 
-    .icon{ position:absolute; left:14px; top:50%; translate:0 -50%; width:20px; height:20px; opacity:.7; }
-    .noicon input{ padding-left:14px; } /* if you keep .noicon wrapper, it’ll still look fine */
+    /* LEFT ICON alignment (fix) */
+    .icon{
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+      width:18px;
+      height:18px;
+      display:block;
+      pointer-events:none;
+      opacity:.75;
+    }
+
+    /* For fields without a left icon (DOB/TOB) */
+    .noicon input{ padding-left:14px !important; }
 
     /* Gender pills */
     .gender{ display:flex; gap:16px; align-items:center; }
@@ -131,7 +145,6 @@
   <!-- Background video -->
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="/static/bg-aurora.mp4" type="video/mp4" />
-    <!-- fallback will be the gradient layers below -->
   </video>
   <!-- Aurora overlay + stars -->
   <div class="aurora" aria-hidden="true"></div>
@@ -245,7 +258,7 @@
     });
     setState();
 
-    /* location autocomplete (Nominatim first) */
+    /* location autocomplete (Nominatim) */
     const input=document.getElementById('autocomplete'),
           list=document.getElementById('suggestions'),
           statusEl=document.getElementById('status'),
