@@ -14,25 +14,38 @@
 
   html,body{height:100%}
   body{
-    margin:0; background:radial-gradient(1400px 700px at 20% -10%, #fffdf7 0%, #f6f2e9 35%, #eee8dd 100%);
-    color:var(--ink);
+    margin:0; color:var(--ink);
     font:16px/1.7 Georgia, "Times New Roman", serif;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    background:#0e1220; /* fallback behind video */
   }
 
-  /* === Subtle aurora + stars animated background (prefers-reduced-motion + print safe) === */
-  .as-bg{position:fixed; inset:0; z-index:-1; pointer-events:none}
+  /* === Animated background: video + aurora + stars === */
+  .as-bg{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+  }
+  .as-bg-video{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:.35; filter:saturate(1.05) contrast(1.05) brightness(.9) blur(2px);
+  }
   .as-bg::before,
-  .as-bg::after{content:""; position:absolute; inset:-20%; mix-blend-mode:multiply; filter:blur(22px)}
-  .as-bg::before{background:
-    radial-gradient(40% 32% at 30% 30%, rgba(174,139,70,.18), transparent 60%),
-    radial-gradient(45% 36% at 70% 60%, rgba(197,162,90,.16), transparent 65%);
-    animation: driftA 28s linear infinite}
-  .as-bg::after{background:
-    radial-gradient(36% 30% at 70% 35%, rgba(197,162,90,.14), transparent 60%),
-    radial-gradient(40% 34% at 35% 70%, rgba(174,139,70,.12), transparent 65%);
-    animation: driftB 36s linear infinite}
-  .as-bg-stars{position:absolute; inset:0; opacity:.25; animation: twinkle 3.6s ease-in-out infinite;
+  .as-bg::after{
+    content:""; position:absolute; inset:-20%; mix-blend-mode:multiply; filter:blur(22px);
+  }
+  .as-bg::before{
+    background:
+      radial-gradient(40% 32% at 30% 30%, rgba(174,139,70,.18), transparent 60%),
+      radial-gradient(45% 36% at 70% 60%, rgba(197,162,90,.16), transparent 65%);
+    animation: driftA 28s linear infinite;
+  }
+  .as-bg::after{
+    background:
+      radial-gradient(36% 30% at 70% 35%, rgba(197,162,90,.14), transparent 60%),
+      radial-gradient(40% 34% at 35% 70%, rgba(174,139,70,.12), transparent 65%);
+    animation: driftB 36s linear infinite;
+  }
+  .as-bg-stars{
+    position:absolute; inset:0; opacity:.25; animation: twinkle 3.6s ease-in-out infinite;
     background:
       radial-gradient(1px 1px at 12% 22%, rgba(197,162,90,.55), transparent 60%),
       radial-gradient(1px 1px at 72% 32%, rgba(197,162,90,.45), transparent 60%),
@@ -40,12 +53,24 @@
       radial-gradient(1px 1px at 86% 54%, rgba(197,162,90,.45), transparent 60%),
       radial-gradient(1px 1px at 24% 78%, rgba(197,162,90,.5), transparent 60%);
   }
-  @keyframes driftA{0%{transform:translate3d(-4%,-2%,0) rotate(0) scale(1.02)}50%{transform:translate3d(6%,3%,0) rotate(180deg) scale(1.04)}100%{transform:translate3d(-4%,-2%,0) rotate(360deg) scale(1.02)}}
-  @keyframes driftB{0%{transform:translate3d(4%,2%,0) rotate(0) scale(1.03)}50%{transform:translate3d(-6%,-3%,0) rotate(-180deg) scale(1.05)}100%{transform:translate3d(4%,2%,0) rotate(-360deg) scale(1.03)}}
-  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.35}}
-  @media (prefers-reduced-motion: reduce){.as-bg::before,.as-bg::after,.as-bg-stars{animation:none}}
-  @media print{.as-bg{display:none !important}}
+  @keyframes driftA {
+    0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1.02); }
+    50%  { transform: translate3d(6%, 3%, 0) rotate(180deg) scale(1.04); }
+    100% { transform: translate3d(-4%, -2%, 0) rotate(360deg) scale(1.02); }
+  }
+  @keyframes driftB {
+    0%   { transform: translate3d(4%, 2%, 0) rotate(0deg) scale(1.03); }
+    50%  { transform: translate3d(-6%, -3%, 0) rotate(-180deg) scale(1.05); }
+    100% { transform: translate3d(4%, 2%, 0) rotate(-360deg) scale(1.03); }
+  }
+  @keyframes twinkle { 0%,100% { opacity:.15 } 50% { opacity:.35 } }
+  @media (prefers-reduced-motion: reduce){
+    .as-bg-video{ display:none !important; }
+    .as-bg::before, .as-bg::after, .as-bg-stars { animation: none; }
+  }
+  @media print{ .as-bg{ display:none !important } }
 
+  /* Layout + card */
   .as-wrap{max-width:860px; margin:28px auto; padding:0 20px}
   .as-card{
     position:relative; overflow:hidden;
@@ -80,20 +105,16 @@
 
   .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
               background:linear-gradient(180deg,#fff,#fffaf0)}
-
   .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
   .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
   .as-pill b{color:var(--golder)}
-
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
   .as-card a:hover{color:#ae8b46}
 
-  /* Ritual / mini cards */
   .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
   .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
-
   .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
     font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
   .as-ico{width:18px; height:18px; color:#ae8b46}
@@ -102,9 +123,6 @@
   .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0;
     background:linear-gradient(90deg, #fffef9, #ffffff)}
 
-  .as-tag{display:inline-block; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-    color:#ae8b46; background:#fff8ea; border:1px solid rgba(197,162,90,.35);
-    padding:4px 8px; border-radius:999px; margin-bottom:10px}
   .as-cta{display:inline-block; margin-top:8px; padding:10px 16px; border-radius:999px;
     border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20;
     background:linear-gradient(180deg,#fff,#fff8ed)}
@@ -112,14 +130,12 @@
   .as-subtle-link{display:inline-block; margin-left:12px; font-size:14px; color:#6b7280;
     border-bottom:1px solid rgba(0,0,0,.15); text-decoration:none}
   .as-subtle-link:hover{color:#ae8b46; border-color:#ae8b46}
-
   .as-more{margin-top:10px}
   .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
   .as-hidden{display:none}
-
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
-  /* --- Gift / Need innovations --- */
+  /* --- Gift / Need --- */
   .gift-box,.need-box{
     border:1px solid rgba(197,162,90,.45);
     border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7);
@@ -158,13 +174,22 @@
 </head>
 <body>
 
-  <!-- Subtle animated background layer -->
-  <div class="as-bg" aria-hidden="true"><div class="as-bg-stars"></div></div>
+  {% set result = result if result is defined else {} %}
+  {% set maha_frag = maha_frag | default('') %}
+  {% set anta_frag = anta_frag | default('') %}
+
+  <!-- Background: video + aurora + stars -->
+  <div class="as-bg" aria-hidden="true">
+    <video class="as-bg-video" autoplay muted loop playsinline preload="none">
+      <source src="{{ url_for('static', filename='bg-aurora.mp4') }}" type="video/mp4">
+    </video>
+    <div class="as-bg-stars"></div>
+  </div>
 
   <div class="as-wrap">
     <article class="as-card">
 
-      <!-- Classic crest (laurel + star) -->
+      <!-- Header -->
       <header class="as-header">
         <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
@@ -179,7 +204,7 @@
 
       <!-- Intro -->
       <section class="as-section">
-        <p>{{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}</p>
+        <p>{{ result.get('intro_paragraph','') }} {{ (result.get('life_path_fomo') or '') | safe }}</p>
       </section>
 
       <!-- Elemental Profile (cleaned) -->
@@ -187,35 +212,37 @@
         <h2>Elemental Profile</h2>
 
         <div class="as-mini">
-          <!-- REMOVED tag: {{ result.birth_element }} soul • Current: {{ result.current_element }} -->
+          <!-- REMOVED tag row (e.g., 'Air soul • Current: Fire') -->
+
           <h3>
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
               <path d="M7 14c2-1 4-1 6 0s4 1 6 0" stroke="currentColor" stroke-linecap="round"/>
             </svg>
-            ✦ Your {{ result.birth_element }} Element at a Glance
+            ✦ Your {{ result.get('birth_element','') }} Element at a Glance
           </h3>
 
           <!-- Gift (customer-centric copy) -->
+          {% set be = result.get('birth_element','') %}
           <div class="gift-box">
             <div style="display:flex; align-items:flex-start;">
               <span class="gift-icon" aria-hidden="true">✦</span>
               <div>
-                <p><strong>Strength you carry:</strong> Your natural <strong>{{ result.birth_element }}</strong> gifts shape how you think, feel and create.</p>
+                <p><strong>Strength you carry:</strong> Your natural <strong>{{ be }}</strong> gifts shape how you think, feel and create.</p>
                 <p class="gift-affirm">
-                  {% if result.birth_element == 'Air' %}You thrive on clarity, connection and curiosity — conversations open doors for you.
-                  {% elif result.birth_element == 'Fire' %}You spark courage, momentum and transformation — your presence ignites action.
-                  {% elif result.birth_element == 'Water' %}You lead with empathy, intuition and grace — people feel safe around you.
-                  {% elif result.birth_element == 'Earth' %}You bring steadiness, discernment and devotion — you make ideas real.
+                  {% if be == 'Air' %}You thrive on clarity, connection and curiosity — conversations open doors for you.
+                  {% elif be == 'Fire' %}You spark courage, momentum and transformation — your presence ignites action.
+                  {% elif be == 'Water' %}You lead with empathy, intuition and grace — people feel safe around you.
+                  {% elif be == 'Earth' %}You bring steadiness, discernment and devotion — you make ideas real.
                   {% else %}You hold vision, stillness and quiet knowing — you sense the path before it appears.{% endif %}
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- Planetary shift (kept). REMOVED the Air → Fire pill row. Kept + softened energy meter. -->
+          <!-- Planetary shift (kept). REMOVED the element → element pill row. Kept + softened energy meter. -->
+          {% set ce = result.get('current_element','') %}
           <div class="need-box">
-            <!-- REMOVED need-header with element chips -->
 
             <!-- energy meter -->
             <div class="energy-bar" role="presentation">
@@ -223,21 +250,21 @@
               <div class="bar-right" style="width:50%"></div>
             </div>
 
-            <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing <strong>{{ result.current_element }}</strong> influence, which can:</p>
+            <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing <strong>{{ ce }}</strong> influence, which can:</p>
             <ul>
-              {% if result.current_element == 'Fire' %}
+              {% if ce == 'Fire' %}
                 <li>Fuel bold action — but risk impulsivity when rushed.</li>
                 <li>Heighten emotional reactivity under stress.</li>
                 <li>Push transformation faster than your nervous system prefers.</li>
-              {% elif result.current_element == 'Air' %}
+              {% elif ce == 'Air' %}
                 <li>Accelerate ideas — yet scatter focus across too many threads.</li>
                 <li>Increase overthinking and decision fatigue.</li>
                 <li>Favor speed over depth, diluting follow-through.</li>
-              {% elif result.current_element == 'Water' %}
+              {% elif ce == 'Water' %}
                 <li>Deepen empathy — while blurring boundaries.</li>
                 <li>Amplify moods and nostalgia.</li>
                 <li>Slow momentum through rumination.</li>
-              {% elif result.current_element == 'Earth' %}
+              {% elif ce == 'Earth' %}
                 <li>Stabilize routines — but resist necessary change.</li>
                 <li>Over-index on caution and control.</li>
                 <li>Create heaviness or stagnation.</li>
@@ -257,7 +284,7 @@
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
                 </svg>
-                {{ result.fragrance_inspired_name | striptags }}
+                {{ (result.get('fragrance_inspired_name') or '') | striptags }}
               </span>
             </div>
             <p style="margin:6px 0 8px">A grounding blend that turns passion into purpose and intensity into clarity.</p>
@@ -270,11 +297,11 @@
 
             <!-- CTAs (respect fallback) -->
             <p style="margin-top:6px">
-              {% if result.fragrance_url %}
-                <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
-                <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+              {% if result.get('fragrance_url') %}
+                <a class="as-cta" href="{{ result.get('fragrance_url') }}" target="_blank" rel="noopener">Explore Blend</a>
+                <a class="as-subtle-link" href="{{ result.get('fragrance_url') }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
               {% else %}
-                <span class="as-cta">{{ result.fragrance_inspired_name | striptags }}</span>
+                <span class="as-cta">{{ (result.get('fragrance_inspired_name') or '') | striptags }}</span>
               {% endif %}
             </p>
           </div>
@@ -289,7 +316,7 @@
             </button>
             <div class="as-hidden">
               <div class="as-callout" style="margin-top:10px">
-                <p>{{ result.elemental_intro | safe }}</p>
+                <p>{{ (result.get('elemental_intro') or '') | safe }}</p>
               </div>
             </div>
           </div>
@@ -301,15 +328,15 @@
         <h2>Planetary Flow &amp; Fragrance-Led Ritual</h2>
 
         <div class="as-grid">
-          <div class="as-pill"><b>Mahadasha:</b> {{ result.mahadasha }}
-            <span class="as-muted">({{ result.mahadasha_start }} – {{ result.mahadasha_end }})</span>
+          <div class="as-pill"><b>Mahadasha:</b> {{ result.get('mahadasha','') }}
+            <span class="as-muted">({{ result.get('mahadasha_start','') }} – {{ result.get('mahadasha_end','') }})</span>
           </div>
-          <div class="as-pill"><b>Antardasha:</b> {{ result.antardasha }}
-            <span class="as-muted">({{ result.antardasha_start }} – {{ result.antardasha_end }})</span>
+          <div class="as-pill"><b>Antardasha:</b> {{ result.get('antardasha','') }}
+            <span class="as-muted">({{ result.get('antardasha_start','') }} – {{ result.get('antardasha_end','') }})</span>
           </div>
         </div>
 
-        <p class="as-muted"><b>Guidance:</b> {{ result.dasha_guidance }}</p>
+        <p class="as-muted"><b>Guidance:</b> {{ result.get('dasha_guidance','') }}</p>
 
         <!-- Mahadasha ritual card -->
         <div class="as-ritual">
@@ -321,8 +348,8 @@
             Mahadasha Healing Offering
           </h3>
           <p>
-            Offer <strong>{{ (result.mahadasha_frag_linked or maha_frag) | safe }}</strong>
-            in devotion to <em>{{ result.mahadasha }}</em> until <strong>{{ result.mahadasha_end }}</strong>.
+            Offer <strong>{{ (result.get('mahadasha_frag_linked') or maha_frag) | safe }}</strong>
+            in devotion to <em>{{ result.get('mahadasha','') }}</em> until <strong>{{ result.get('mahadasha_end','') }}</strong>.
           </p>
           <ul class="as-bullets">
             <li>Grounds intensity</li>
@@ -330,10 +357,10 @@
             <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
           </ul>
 
-          {% if result.mahadasha_frag_url %}
+          {% if result.get('mahadasha_frag_url') %}
             <p>
-              <a class="as-cta" href="{{ result.mahadasha_frag_url }}" target="_blank" rel="noopener">Add to Ritual</a>
-              <a class="as-subtle-link" href="{{ result.mahadasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+              <a class="as-cta" href="{{ result.get('mahadasha_frag_url') }}" target="_blank" rel="noopener">Add to Ritual</a>
+              <a class="as-subtle-link" href="{{ result.get('mahadasha_frag_url') }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
             </p>
           {% endif %}
 
@@ -358,16 +385,16 @@
             Antardasha Healing Offering
           </h3>
           <p>
-            Offer <strong>{{ (result.antardasha_frag_linked or anta_frag) | safe }}</strong>
-            in reverence to <em>{{ result.antardasha }}</em>.
-            If a {{ result.antardasha }} idol — representing {{ result.offering_to }} — is unavailable,
-            invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.antardasha_end }}</strong>.
+            Offer <strong>{{ (result.get('antardasha_frag_linked') or anta_frag) | safe }}</strong>
+            in reverence to <em>{{ result.get('antardasha','') }}</em>.
+            If a {{ result.get('antardasha','') }} idol — representing {{ result.get('offering_to','') }} — is unavailable,
+            invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.get('antardasha_end','') }}</strong>.
           </p>
 
-          {% if result.antardasha_frag_url %}
+          {% if result.get('antardasha_frag_url') %}
             <p>
-              <a class="as-cta" href="{{ result.antardasha_frag_url }}" target="_blank" rel="noopener">View Offering</a>
-              <a class="as-subtle-link" href="{{ result.antardasha_frag_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+              <a class="as-cta" href="{{ result.get('antardasha_frag_url') }}" target="_blank" rel="noopener">View Offering</a>
+              <a class="as-subtle-link" href="{{ result.get('antardasha_frag_url') }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
             </p>
           {% endif %}
         </div>
@@ -377,30 +404,30 @@
 
       <!-- Weak Planet -->
       <section class="as-section">
-        {% if result.weak_planet and (result.weak_fragrance_linked or result.weak_fragrance) %}
+        {% if result.get('weak_planet') and (result.get('weak_fragrance_linked') or result.get('weak_fragrance')) %}
           <div class="as-ritual">
             <h3>
               <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="5.5" stroke="currentColor"/>
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1"/>
               </svg>
-              Balancing a Weak {{ result.weak_planet }}
+              Balancing a Weak {{ result.get('weak_planet','') }}
             </h3>
             <p>
-              Apply <strong>{{ (result.weak_fragrance_linked or result.weak_fragrance) | safe }}</strong>
-              to gently balance {{ result.weak_planet }}’s diminished influence.
+              Apply <strong>{{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | safe }}</strong>
+              to gently balance {{ result.get('weak_planet','') }}’s diminished influence.
             </p>
             <ul class="as-bullets">
-              <li>{{ result.weak_healing_message }}</li>
+              <li>{{ result.get('weak_healing_message','') }}</li>
               <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
             </ul>
 
-            {% if result.weak_fragrance_url %}
+            {% if result.get('weak_fragrance_url') %}
               <p>
-                <a class="as-cta" href="{{ result.weak_fragrance_url }}" target="_blank" rel="noopener">
-                  Experience {{ (result.weak_fragrance_linked or result.weak_fragrance) | striptags }}
+                <a class="as-cta" href="{{ result.get('weak_fragrance_url') }}" target="_blank" rel="noopener">
+                  Experience {{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | striptags }}
                 </a>
-                <a class="as-subtle-link" href="{{ result.weak_fragrance_url }}#details" target="_blank" rel="noopener">
+                <a class="as-subtle-link" href="{{ result.get('weak_fragrance_url') }}#details" target="_blank" rel="noopener">
                   Learn more about this blend
                 </a>
               </p>
