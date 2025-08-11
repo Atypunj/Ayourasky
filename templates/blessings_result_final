@@ -10,66 +10,42 @@
   :root{
     --ink:#1b1d20; --sub:#3c434a; --paper:#fbfaf7; --card:#ffffff;
     --gold:#c5a25a; --golder:#ae8b46; --muted:#7a838c;
-    --air:#9ac7ff; --fire:#ffc7b3; --earth:#c9d2b9; --water:#b7e1e9; --ether:#d7c6ff;
   }
 
   html,body{height:100%}
   body{
-    margin:0; color:var(--ink);
+    margin:0; background:radial-gradient(1400px 700px at 20% -10%, #fffdf7 0%, #f6f2e9 35%, #eee8dd 100%);
+    color:var(--ink);
     font:16px/1.7 Georgia, "Times New Roman", serif;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
 
-  /* === Animated background (aurora + stars) === */
-  .as-bg{
-    position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background: radial-gradient(1400px 700px at 20% -10%, #fffdf7 0%, #f6f2e9 35%, #eee8dd 100%);
-    overflow:hidden;
-  }
+  /* === Subtle aurora + stars animated background (prefers-reduced-motion + print safe) === */
+  .as-bg{position:fixed; inset:0; z-index:-1; pointer-events:none}
   .as-bg::before,
-  .as-bg::after{
-    content:""; position:absolute; inset:-20%;
-    background:
-      radial-gradient(40% 32% at 30% 30%, rgba(174,139,70,.18), transparent 60%),
-      radial-gradient(45% 36% at 70% 60%, rgba(197,162,90,.16), transparent 65%);
-    filter: blur(22px);
-    animation: driftA 28s linear infinite;
-    mix-blend-mode:multiply;
-  }
-  .as-bg::after{
-    background:
-      radial-gradient(36% 30% at 70% 35%, rgba(197,162,90,.14), transparent 60%),
-      radial-gradient(40% 34% at 35% 70%, rgba(174,139,70,.12), transparent 65%);
-    animation: driftB 36s linear infinite;
-  }
-  .as-bg-stars{
-    position:absolute; inset:0;
+  .as-bg::after{content:""; position:absolute; inset:-20%; mix-blend-mode:multiply; filter:blur(22px)}
+  .as-bg::before{background:
+    radial-gradient(40% 32% at 30% 30%, rgba(174,139,70,.18), transparent 60%),
+    radial-gradient(45% 36% at 70% 60%, rgba(197,162,90,.16), transparent 65%);
+    animation: driftA 28s linear infinite}
+  .as-bg::after{background:
+    radial-gradient(36% 30% at 70% 35%, rgba(197,162,90,.14), transparent 60%),
+    radial-gradient(40% 34% at 35% 70%, rgba(174,139,70,.12), transparent 65%);
+    animation: driftB 36s linear infinite}
+  .as-bg-stars{position:absolute; inset:0; opacity:.25; animation: twinkle 3.6s ease-in-out infinite;
     background:
       radial-gradient(1px 1px at 12% 22%, rgba(197,162,90,.55), transparent 60%),
       radial-gradient(1px 1px at 72% 32%, rgba(197,162,90,.45), transparent 60%),
       radial-gradient(1px 1px at 42% 68%, rgba(197,162,90,.55), transparent 60%),
       radial-gradient(1px 1px at 86% 54%, rgba(197,162,90,.45), transparent 60%),
       radial-gradient(1px 1px at 24% 78%, rgba(197,162,90,.5), transparent 60%);
-    animation: twinkle 3.6s ease-in-out infinite;
-    opacity:.25;
   }
-  @keyframes driftA {
-    0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1.02); }
-    50%  { transform: translate3d(6%, 3%, 0) rotate(180deg) scale(1.04); }
-    100% { transform: translate3d(-4%, -2%, 0) rotate(360deg) scale(1.02); }
-  }
-  @keyframes driftB {
-    0%   { transform: translate3d(4%, 2%, 0) rotate(0deg) scale(1.03); }
-    50%  { transform: translate3d(-6%, -3%, 0) rotate(-180deg) scale(1.05); }
-    100% { transform: translate3d(4%, 2%, 0) rotate(-360deg) scale(1.03); }
-  }
-  @keyframes twinkle { 0%,100% { opacity:.15 } 50% { opacity:.35 } }
-  @media (prefers-reduced-motion: reduce){
-    .as-bg::before, .as-bg::after, .as-bg-stars { animation: none; }
-  }
-  @media print{ .as-bg{ display:none !important } }
+  @keyframes driftA{0%{transform:translate3d(-4%,-2%,0) rotate(0) scale(1.02)}50%{transform:translate3d(6%,3%,0) rotate(180deg) scale(1.04)}100%{transform:translate3d(-4%,-2%,0) rotate(360deg) scale(1.02)}}
+  @keyframes driftB{0%{transform:translate3d(4%,2%,0) rotate(0) scale(1.03)}50%{transform:translate3d(-6%,-3%,0) rotate(-180deg) scale(1.05)}100%{transform:translate3d(4%,2%,0) rotate(-360deg) scale(1.03)}}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.35}}
+  @media (prefers-reduced-motion: reduce){.as-bg::before,.as-bg::after,.as-bg-stars{animation:none}}
+  @media print{.as-bg{display:none !important}}
 
-  /* Layout + card */
   .as-wrap{max-width:860px; margin:28px auto; padding:0 20px}
   .as-card{
     position:relative; overflow:hidden;
@@ -104,16 +80,20 @@
 
   .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
               background:linear-gradient(180deg,#fff,#fffaf0)}
+
   .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
   .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
   .as-pill b{color:var(--golder)}
+
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
   .as-card a:hover{color:#ae8b46}
 
+  /* Ritual / mini cards */
   .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
   .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px;
     background:linear-gradient(180deg,#fff,#fffaf5); margin:18px 0}
+
   .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
     font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
   .as-ico{width:18px; height:18px; color:#ae8b46}
@@ -136,28 +116,37 @@
   .as-more{margin-top:10px}
   .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
   .as-hidden{display:none}
+
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
-  /* Gift / Need containers */
-  .as-box{border:1px solid rgba(197,162,90,.42); border-radius:16px; padding:14px 16px;
-    background:linear-gradient(180deg,#fff,#fffaf7);}
-  .as-box + .as-box{margin-top:12px;}
-  .as-head{display:flex; align-items:baseline; gap:10px;}
-  .as-head .as-ico{width:18px; height:18px; flex:0 0 18px; position:relative; top:2px}
+  /* --- Gift / Need innovations --- */
+  .gift-box,.need-box{
+    border:1px solid rgba(197,162,90,.45);
+    border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7);
+    margin:12px 0;
+  }
+  .gift-icon{display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:999px; margin-right:8px;
+    border:1px solid rgba(197,162,90,.55); color:#ae8b46; font-size:14px;
+    background:linear-gradient(180deg,#fff,#fff6e6);} 
+  .gift-box p{margin:6px 0;}
+  .gift-affirm{font-style:italic; color:#6b7280; margin-top:6px}
 
-  .as-gift{display:flex; gap:10px; align-items:flex-start}
-  .as-gift .gift-icon{width:24px; height:24px}
-  .as-gift p{margin:0}
+  /* Energy meter (softened & centered) */
+  .energy-bar{height:8px; border-radius:999px; overflow:hidden; background:#f4f1ea; margin:12px auto 12px; width:min(420px,78%)}
+  .bar-left{height:100%; float:left; background:linear-gradient(90deg,#e9f3ff,#dceeff)}
+  .bar-right{height:100%; float:right; background:linear-gradient(90deg,#ffddcf,#ffd0ba)}
 
-  /* Remedy block */
-  .as-remedy{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:14px 16px;
-    background:linear-gradient(180deg,#fff,#fffaf7); margin:12px 0}
-  .as-remedy-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
-  .as-badge{display:inline-flex; align-items:center; gap:8px; padding:9px 12px; border-radius:999px;
-    border:1px solid rgba(197,162,90,.6); background:linear-gradient(180deg,#fff,#fffaf0); font-weight:600}
+  /* Chips */
   .as-chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
   .as-chip{font-size:12px; padding:6px 10px; border:1px solid rgba(197,162,90,.45);
     border-radius:999px; background:#fffdf7}
+
+  /* Premium remedy layout */
+  .as-remedy{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7); margin:12px 0}
+  .as-remedy-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .as-badge{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid rgba(197,162,90,.6); border-radius:999px; background:linear-gradient(180deg,#fff,#fffaf0); font-weight:600}
+  .as-badge svg{width:16px; height:16px; color:#ae8b46}
 
   @media print{
     body{background:#fff}
@@ -169,13 +158,13 @@
 </head>
 <body>
 
-  <!-- Animated background -->
+  <!-- Subtle animated background layer -->
   <div class="as-bg" aria-hidden="true"><div class="as-bg-stars"></div></div>
 
   <div class="as-wrap">
     <article class="as-card">
 
-      <!-- Crest -->
+      <!-- Classic crest (laurel + star) -->
       <header class="as-header">
         <svg class="as-crest" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 8l2.9 8.8h9.3L36.7 23l2.9 8.8L32 26.6l-7.6 5.2L27.3 23l-7.6-6.2h9.3L32 8z" stroke="currentColor" stroke-width="1.4"/>
@@ -193,101 +182,115 @@
         <p>{{ result.intro_paragraph }} {{ result.life_path_fomo | safe }}</p>
       </section>
 
-      <!-- Elemental Profile (reworked) -->
+      <!-- Elemental Profile (cleaned) -->
       <section class="as-section">
         <h2>Elemental Profile</h2>
 
-        <!-- Customer-centric element glance -->
-        <div class="as-box">
-          <div class="as-head">
+        <div class="as-mini">
+          <!-- REMOVED tag: {{ result.birth_element }} soul • Current: {{ result.current_element }} -->
+          <h3>
             <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" stroke="currentColor"/>
               <path d="M7 14c2-1 4-1 6 0s4 1 6 0" stroke="currentColor" stroke-linecap="round"/>
             </svg>
-            <h3 style="margin:0">✦ Your {{ result.birth_element }} Element at a Glance</h3>
-          </div>
+            ✦ Your {{ result.birth_element }} Element at a Glance
+          </h3>
 
-          <div class="as-gift" style="margin-top:10px">
-            <span class="gift-icon" aria-hidden="true">✦</span>
-            <div>
-              <p><strong>Strength you carry:</strong>
-                Your natural <strong>{{ result.birth_element }}</strong> gifts shape how you think, feel and create.</p>
-              <p class="gift-affirm">
-                {% if result.birth_element == 'Air' %}You thrive on clarity, connection and curiosity — conversations open doors for you.
-                {% elif result.birth_element == 'Fire' %}You spark courage, momentum and transformation — your presence ignites action.
-                {% elif result.birth_element == 'Water' %}You lead with empathy, intuition and grace — people feel safe around you.
-                {% elif result.birth_element == 'Earth' %}You bring steadiness, discernment and devotion — you make ideas real.
-                {% else %}You hold vision, stillness and quiet knowing — you sense the path before it appears.{% endif %}
-              </p>
+          <!-- Gift (customer-centric copy) -->
+          <div class="gift-box">
+            <div style="display:flex; align-items:flex-start;">
+              <span class="gift-icon" aria-hidden="true">✦</span>
+              <div>
+                <p><strong>Strength you carry:</strong> Your natural <strong>{{ result.birth_element }}</strong> gifts shape how you think, feel and create.</p>
+                <p class="gift-affirm">
+                  {% if result.birth_element == 'Air' %}You thrive on clarity, connection and curiosity — conversations open doors for you.
+                  {% elif result.birth_element == 'Fire' %}You spark courage, momentum and transformation — your presence ignites action.
+                  {% elif result.birth_element == 'Water' %}You lead with empathy, intuition and grace — people feel safe around you.
+                  {% elif result.birth_element == 'Earth' %}You bring steadiness, discernment and devotion — you make ideas real.
+                  {% else %}You hold vision, stillness and quiet knowing — you sense the path before it appears.{% endif %}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Planetary Shift (pills & meter removed) -->
-        <div class="as-box">
-          <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing
-            <strong>{{ result.current_element }}</strong> influence, which can:</p>
-          <ul>
-            {% if result.current_element == 'Fire' %}
-              <li>Fuel bold action — but risk impulsivity when rushed.</li>
-              <li>Heighten emotional reactivity under stress.</li>
-              <li>Push transformation faster than your nervous system prefers.</li>
-            {% elif result.current_element == 'Air' %}
-              <li>Accelerate ideas — yet scatter focus across too many threads.</li>
-              <li>Increase overthinking and decision fatigue.</li>
-              <li>Favor speed over depth, diluting follow-through.</li>
-            {% elif result.current_element == 'Water' %}
-              <li>Deepen empathy — while blurring boundaries.</li>
-              <li>Amplify moods and nostalgia.</li>
-              <li>Slow momentum through rumination.</li>
-            {% elif result.current_element == 'Earth' %}
-              <li>Stabilize routines — but resist necessary change.</li>
-              <li>Over-index on caution and control.</li>
-              <li>Create heaviness or stagnation.</li>
-            {% else %}
-              <li>Expand vision — yet detach from practical steps.</li>
-              <li>Invite stillness that can drift into inaction.</li>
-              <li>Prefer the ethereal over the embodied.</li>
-            {% endif %}
-          </ul>
-        </div>
+          <!-- Planetary shift (kept). REMOVED the Air → Fire pill row. Kept + softened energy meter. -->
+          <div class="need-box">
+            <!-- REMOVED need-header with element chips -->
 
-        <!-- Remedy (refined) -->
-        <div class="as-remedy">
-          <div class="as-remedy-head">
-            <strong>Your Remedy:</strong>
-            <span class="as-badge" aria-label="Recommended fragrance">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px">
-                <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
-              </svg>
-              {{ result.fragrance_inspired_name | striptags }}
-            </span>
-          </div>
-          <p style="margin-top:6px">A grounding blend that turns passion into purpose and intensity into clarity.</p>
+            <!-- energy meter -->
+            <div class="energy-bar" role="presentation">
+              <div class="bar-left" style="width:50%"></div>
+              <div class="bar-right" style="width:50%"></div>
+            </div>
 
-          <div class="as-chips">
-            <span class="as-chip">Centers breath &amp; focus</span>
-            <span class="as-chip">Softens reactivity</span>
-            <span class="as-chip">Guides action with calm</span>
+            <p><strong>Planetary Shift:</strong> As per planetary calculations, you’re currently experiencing <strong>{{ result.current_element }}</strong> influence, which can:</p>
+            <ul>
+              {% if result.current_element == 'Fire' %}
+                <li>Fuel bold action — but risk impulsivity when rushed.</li>
+                <li>Heighten emotional reactivity under stress.</li>
+                <li>Push transformation faster than your nervous system prefers.</li>
+              {% elif result.current_element == 'Air' %}
+                <li>Accelerate ideas — yet scatter focus across too many threads.</li>
+                <li>Increase overthinking and decision fatigue.</li>
+                <li>Favor speed over depth, diluting follow-through.</li>
+              {% elif result.current_element == 'Water' %}
+                <li>Deepen empathy — while blurring boundaries.</li>
+                <li>Amplify moods and nostalgia.</li>
+                <li>Slow momentum through rumination.</li>
+              {% elif result.current_element == 'Earth' %}
+                <li>Stabilize routines — but resist necessary change.</li>
+                <li>Over-index on caution and control.</li>
+                <li>Create heaviness or stagnation.</li>
+              {% else %}
+                <li>Expand vision — yet detach from practical steps.</li>
+                <li>Invite stillness that can drift into inaction.</li>
+                <li>Prefer the ethereal over the embodied.</li>
+              {% endif %}
+            </ul>
           </div>
 
-          {% if result.fragrance_url %}
+          <!-- Premium Remedy block -->
+          <div class="as-remedy">
+            <div class="as-remedy-head">
+              <strong>Your Remedy:</strong>
+              <span class="as-badge" aria-label="Recommended fragrance">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
+                </svg>
+                {{ result.fragrance_inspired_name | striptags }}
+              </span>
+            </div>
+            <p style="margin:6px 0 8px">A grounding blend that turns passion into purpose and intensity into clarity.</p>
+
+            <div class="as-chips">
+              <span class="as-chip">Centers breath &amp; focus</span>
+              <span class="as-chip">Softens reactivity</span>
+              <span class="as-chip">Guides action with calm</span>
+            </div>
+
+            <!-- CTAs (respect fallback) -->
             <p style="margin-top:6px">
-              <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
-              <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more</a>
+              {% if result.fragrance_url %}
+                <a class="as-cta" href="{{ result.fragrance_url }}" target="_blank" rel="noopener">Explore Blend</a>
+                <a class="as-subtle-link" href="{{ result.fragrance_url }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
+              {% else %}
+                <span class="as-cta">{{ result.fragrance_inspired_name | striptags }}</span>
+              {% endif %}
             </p>
-          {% endif %}
-        </div>
+          </div>
 
-        <!-- Read more toggle -->
-        <div class="as-more">
-          <button class="as-more-toggle" type="button"
-            onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">
-            Read full insight
-          </button>
-          <div class="as-hidden">
-            <div class="as-callout" style="margin-top:10px">
-              <p>{{ result.elemental_intro | safe }}</p>
+          <!-- REMOVED numbered usage steps intentionally -->
+
+          <!-- Read more toggle (long-form copy) -->
+          <div class="as-more">
+            <button class="as-more-toggle" type="button"
+              onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">
+              Read full insight
+            </button>
+            <div class="as-hidden">
+              <div class="as-callout" style="margin-top:10px">
+                <p>{{ result.elemental_intro | safe }}</p>
+              </div>
             </div>
           </div>
         </div>
