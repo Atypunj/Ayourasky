@@ -68,6 +68,19 @@
     .as-bg-video{ display:none !important; }
     .as-bg::before, .as-bg::after, .as-bg-stars { animation: none; }
   }
+  @media (min-width:1100px){
+    .as-columns{ grid-template-columns: 1.15fr .85fr; align-items:start; }
+    .as-columns > .right > .as-section{ margin:16px 0 16px; }
+    .as-columns > .right > .as-section + .as-section{ margin-top:8px; }
+    .as-columns > .as-section:first-child,
+    .as-columns > .right > .as-section:first-child{ margin-top:0; }
+  }
+    .as-columns > .right > .as-section{ margin:16px 0 16px }
+    .as-columns > .right > .as-section + .as-section{ margin-top:8px; }
+    .as-columns > .as-section:first-child,
+    .as-columns > .right > .as-section:first-child{ margin-top:0; }
+  } }
+
   @media print{ .as-bg{ display:none !important } }
 
   /* Layout + card */
@@ -99,8 +112,7 @@
   .as-divider{display:flex; align-items:center; gap:12px; justify-content:center; margin:20px auto 0; color:var(--gold)}
   .as-divider::before,.as-divider::after{content:""; height:1px; flex:1; background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
-  .as-card h2{font:600 22px/1.35 "Garamond","Georgia",serif; color:var(--ink); margin:12px 0 6px}
-  .as-card p{margin:8px 0; color:#23262a; line-height:1.75}
+  .as-card h2{font:600 22px/1.35 "Garamond","Georgia",serif; color:var(--ink); margin:0 0 12px; color:#23262a; line-height:1.75}
   .as-muted{color:var(--muted)}
   .as-section{ margin:14px 0 8px }
 
@@ -136,11 +148,15 @@
   .as-hidden{display:none}
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
+  /* Desktop/mobile visibility for duplicated Weak Planet */
+  .dup--desktop{ display:none }
+  @media (min-width:1100px){ .dup--desktop{ display:block } .dup--mobile{ display:none } }
+
   /* Two columns when there's room */
   .as-columns{ display:grid; gap:18px; }
   @media (min-width:1100px){
     .as-columns{ grid-template-columns: 1.15fr .85fr; align-items:start; }
-    .as-columns > .right > .as-section{ margin:0 0 14px; }
+    .as-columns > .right > .as-section{ margin:14px 0 14px; }
   }
 
   /* --- Gift / Need --- */
@@ -332,8 +348,8 @@
         </div>
       </section>
 
-      <!-- Planetary Flow -->
       <div class="right">
+<!-- Planetary Flow -->
       <section class="as-section">
         <h2>Planetary Flow &amp; Fragrance-Led Ritual</h2>
 
@@ -412,8 +428,8 @@
         <div class="as-rule"></div>
       </section>
 
-      <!-- Weak Planet -->
-      <section class="as-section">
+      <!-- Weak Planet (mobile/right-column) -->
+      <section class="as-section weak-planet dup--mobile">
         {% if result.get('weak_planet') and (result.get('weak_fragrance_linked') or result.get('weak_fragrance')) %}
           <div class="as-ritual">
             <h3>
@@ -447,8 +463,46 @@
           <p class="as-muted"><em>No weak planet fragrance guidance available at the moment.</em></p>
         {% endif %}
       </section>
-      </div>
+      
+</div>
+</div>
     </div>
+
+      <!-- Weak Planet (desktop/full-width) -->
+      <section class="as-section weak-planet dup--desktop">
+        {% if result.get('weak_planet') and (result.get('weak_fragrance_linked') or result.get('weak_fragrance')) %}
+          <div class="as-ritual">
+            <h3>
+              <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="5.5" stroke="currentColor"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1"/>
+              </svg>
+              Balancing a Weak {{ result.get('weak_planet','') }}
+            </h3>
+            <p>
+              Apply <strong>{{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | safe }}</strong>
+              to gently balance {{ result.get('weak_planet','') }}’s diminished influence.
+            </p>
+            <ul class="as-bullets">
+              <li>{{ result.get('weak_healing_message','') }}</li>
+              <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
+            </ul>
+
+            {% if result.get('weak_fragrance_url') %}
+              <p>
+                <a class="as-cta" href="{{ result.get('weak_fragrance_url') }}" target="_blank" rel="noopener">
+                  Experience {{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | striptags }}
+                </a>
+                <a class="as-subtle-link" href="{{ result.get('weak_fragrance_url') }}#details" target="_blank" rel="noopener">
+                  Learn more about this blend
+                </a>
+              </p>
+            {% endif %}
+          </div>
+        {% else %}
+          <p class="as-muted"><em>No weak planet fragrance guidance available at the moment.</em></p>
+        {% endif %}
+      </section>
 
       <!-- Footer divider only -->
       <section class="as-section">
