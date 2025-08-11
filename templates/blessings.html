@@ -51,8 +51,11 @@
 
     /* ====== Card / Form ====== */
     .wrap{ position:relative; z-index:2; width:min(860px,92vw); margin:22px auto 26px; }
-    .card{ background:var(--card-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      border-radius:var(--radius); box-shadow:var(--ring); border:1px solid rgba(255,255,255,.6); overflow:hidden; isolation:isolate;}
+    .card{
+      background:var(--card-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      border-radius:var(--radius); box-shadow:var(--ring); border:1px solid rgba(255,255,255,.6);
+      overflow:visible; isolation:isolate; /* allow dropdown to overflow */
+    }
     .card::before{ content:""; position:absolute; inset:-1px; border-radius:calc(var(--radius) + 1px); padding:1px;
       background:linear-gradient(135deg, rgba(47,191,113,.6), rgba(199,154,62,.5), rgba(107,138,246,.6));
       -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -62,13 +65,15 @@
     .grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap:24px;   /* spacing fix between DOB / TOB */
+      column-gap:28px;   /* spacing fix between DOB / TOB */
       row-gap:18px;
     }
     .full{ grid-column:1 / -1; }
 
     label{ display:block; font-weight:600; color:#223049; margin:6px 0 8px; font-size:.92rem; }
     .field{ position:relative; }
+    /* ensure a bit of space between label and control */
+    label + .control, label + input, label + select{ margin-top:6px; display:block; }
 
     /* Base inputs */
     .field input[type="text"],
@@ -80,7 +85,7 @@
     }
     .field input[type="date"], .field input[type="time"]{
       width:100%; appearance:auto; -webkit-appearance:auto; border:1px solid #d5dbea; background:#fff; color:#0f1627;
-      border-radius:14px; padding:14px 48px 14px 14px;  /* more space for right icons */
+      border-radius:14px; padding:14px 56px 14px 14px;  /* more space for right icons */
       font-size:15px; box-shadow:0 8px 18px rgba(16,24,40,.04);
       transition:border .15s ease, box-shadow .15s ease, transform .06s ease; outline:none;
       box-sizing:border-box; background-clip:padding-box;
@@ -88,17 +93,15 @@
     .field input:focus, .field select:focus{ border-color:var(--brand); box-shadow:0 0 0 4px rgba(47,191,113,.18); transform:translateY(-1px); }
     input[type="date"]::-webkit-calendar-picker-indicator,
     input[type="time"]::-webkit-calendar-picker-indicator{ opacity:1; cursor:pointer; }
+    /* iOS/Safari time edit tweak */
+    input[type="time"]::-webkit-datetime-edit{ padding:0 2px; letter-spacing:.6px; }
 
-    /* Icon wrapper = ensures icon centers on input height, not label+input */
+    /* Icon wrapper = center icon on input height, not label+input */
     .control{ position:relative; }
     .control input[type="text"], .control select{ padding-left:46px; } /* 16 left + 18 icon + 12 gap */
     .control .icon{
-      position:absolute;
-      left:16px;
-      top:50%;
-      transform:translateY(-50%);
-      width:18px; height:18px;
-      display:block; pointer-events:none; opacity:.75;
+      position:absolute; left:16px; top:50%; transform:translateY(-50%);
+      width:18px; height:18px; display:block; pointer-events:none; opacity:.75;
     }
 
     /* For fields without a left icon (DOB/TOB) */
@@ -108,9 +111,10 @@
     .gender{ display:flex; gap:16px; align-items:center; }
     .chip{ display:flex; align-items:center; gap:8px; padding:12px 18px; border-radius:999px; cursor:pointer;
       border:1px solid #d5dbea; background:#fff; transition:box-shadow .15s ease, border .15s ease, background .15s ease;
-      font-weight:600; color:#111827; }
+      font-weight:600; color:#111827; position:relative; }
     .chip:hover{ box-shadow:0 4px 16px rgba(16,24,40,.06); }
-    .chip input{ appearance:none; width:0; height:0; position:absolute; inset:auto; }
+    .chip input{ position:absolute; opacity:0; width:1px; height:1px; } /* still focusable */
+    .chip:has(input:focus-visible), .chip:focus-within{ outline:2px solid #94bfff; outline-offset:3px; }
     .chip[data-checked="true"]{ outline:2px solid #A7C1FF; outline-offset:2px; border-color:#A7C1FF; background:#f7faff; }
 
     .actions{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin:6px 0 12px; }
@@ -121,11 +125,13 @@
     .btn:hover{ transform: translateY(-1px); box-shadow:0 14px 32px rgba(47,191,113,.34); }
     .btn:active{ transform: translateY(0); box-shadow:0 8px 18px rgba(47,191,113,.28); }
     .ghost{ background:#ffffff; border:1px solid #e3e8f5; color:#0f1627; font-weight:600; }
+    /* make "Use my location" look like a proper control */
+    #useLocation{ padding:10px 14px; border-radius:10px; font-weight:600; font-size:.95rem; }
 
     .suggest{
       position:absolute; inset:auto 0 auto 0; top:100%; margin-top:6px; list-style:none; padding:6px; max-height:220px; overflow:auto;
       background:#fff; border:1px solid #dbe3f6; border-radius:14px; box-shadow:0 16px 40px rgba(16,24,40,.14);
-      display:none; z-index:50; scrollbar-gutter:stable;
+      display:none; z-index:100; scrollbar-gutter:stable; overflow:hidden;
     }
     .suggest li{ padding:10px 12px; border-radius:10px; cursor:pointer; font-size:.95rem; color:#0f1627; display:flex; align-items:center; gap:10px; }
     .suggest li:hover, .suggest li.active{ background:#f4f8ff; }
@@ -146,7 +152,7 @@
   </style>
 </head>
 <body>
-  <!-- Background video -->
+  <!-- Background video (replace src with your asset path) -->
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="/static/bg-aurora.mp4" type="video/mp4" />
   </video>
