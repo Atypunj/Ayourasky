@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -49,13 +49,25 @@
       radial-gradient(1px 1px at 86% 54%, rgba(197,162,90,.45), transparent 60%),
       radial-gradient(1px 1px at 24% 78%, rgba(197,162,90,.5), transparent 60%);
   }
-  @keyframes driftA { 0%{transform:translate3d(-4%, -2%, 0) rotate(0) scale(1.02)} 50%{transform:translate3d(6%, 3%, 0) rotate(180deg) scale(1.04)} 100%{transform:translate3d(-4%, -2%, 0) rotate(360deg) scale(1.02)} }
-  @keyframes driftB { 0%{transform:translate3d(4%, 2%, 0) rotate(0) scale(1.03)} 50%{transform:translate3d(-6%, -3%, 0) rotate(-180deg) scale(1.05)} 100%{transform:translate3d(4%, 2%, 0) rotate(-360deg) scale(1.03)} }
+  @keyframes driftA {
+    0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1.02); }
+    50%  { transform: translate3d(6%, 3%, 0) rotate(180deg) scale(1.04); }
+    100% { transform: translate3d(-4%, -2%, 0) rotate(360deg) scale(1.02); }
+  }
+  @keyframes driftB {
+    0%   { transform: translate3d(4%, 2%, 0) rotate(0deg) scale(1.03); }
+    50%  { transform: translate3d(-6%, -3%, 0) rotate(-180deg) scale(1.05); }
+    100% { transform: translate3d(4%, 2%, 0) rotate(-360deg) scale(1.03); }
+  }
   @keyframes twinkle { 0%,100% { opacity:.15 } 50% { opacity:.35 } }
-  @media (prefers-reduced-motion: reduce){ .as-bg-video{ display:none !important } .as-bg::before, .as-bg::after, .as-bg-stars { animation:none } }
+  @media (prefers-reduced-motion: reduce){
+    .as-bg-video{ display:none !important; }
+    .as-bg::before, .as-bg::after, .as-bg-stars { animation: none; }
+  }
 
+  /* Layout + card */
   .as-wrap{ max-width:1200px; margin:24px auto; padding:0 24px }
-  @media (min-width:1400px){ .as-wrap{ max-width:1320px } }
+  @media (min-width:1400px){ .as-wrap{ max-width:1320px; } }
   .as-card{
     position:relative; overflow:hidden;
     background:var(--card); border-radius:22px; padding:22px 26px 28px;
@@ -86,55 +98,72 @@
   .as-muted{color:var(--muted)}
   .as-section{ margin:14px 0 8px }
 
-  .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf0)}
+  .as-callout{border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px;
+              background:linear-gradient(180deg,#fff,#fffaf0)}
   .as-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:8px 0 6px}
   .as-pill{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:10px 12px; background:#fff}
   .as-pill b{color:var(--golder)}
   .as-card a{color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(197,162,90,.55)}
   .as-card a:hover{color:#ae8b46}
 
-  .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px; background:linear-gradient(180deg,#fff,#fffaf5); margin:12px 0}
-  .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px; background:linear-gradient(180deg,#fff,#fffaf5); margin:12px 0}
-  .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px; font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
+  .as-ritual{border:1px solid rgba(197,162,90,.35); border-radius:18px; padding:16px 18px;
+    background:linear-gradient(180deg,#fff,#fffaf5); margin:12px 0}
+  .as-mini{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:16px 18px;
+    background:linear-gradient(180deg,#fff,#fffaf5); margin:12px 0}
+  .as-ritual h3, .as-mini h3{display:flex; align-items:center; gap:10px; margin:0 0 10px;
+    font:600 18px/1.35 "Garamond","Georgia",serif; color:#1b1d20}
   .as-ico{width:18px; height:18px; color:#ae8b46}
   .as-bullets{margin:10px 0 8px; padding-left:20px}
   .as-bullets li{ margin:4px 0 }
-  .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0; background:linear-gradient(90deg, #fffef9, #ffffff)}
+  .as-note{border-left:3px solid rgba(197,162,90,.6); padding:10px 12px; margin:10px 0 0;
+    background:linear-gradient(90deg, #fffef9, #ffffff)}
 
-  .as-cta{display:inline-block; margin-top:8px; padding:10px 16px; border-radius:999px; border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20; background:linear-gradient(180deg,#fff,#fff8ed)}
+  .as-cta{display:inline-block; margin-top:8px; padding:10px 16px; border-radius:999px;
+    border:1px solid rgba(197,162,90,.55); text-decoration:none; color:#1b1d20;
+    background:linear-gradient(180deg,#fff,#fff8ed)}
   .as-cta:hover{color:#ae8b46}
-  .as-subtle-link{display:inline-block; margin-left:12px; font-size:14px; color:#6b7280; border-bottom:1px solid rgba(0,0,0,.15); text-decoration:none}
+  .as-subtle-link{display:inline-block; margin-left:12px; font-size:14px; color:#6b7280;
+    border-bottom:1px solid rgba(0,0,0,.15); text-decoration:none}
   .as-subtle-link:hover{color:#ae8b46; border-color:#ae8b46}
-  .as-more{margin-top:10px}
-  .as-more-toggle{background:none; border:0; color:#ae8b46; cursor:pointer; padding:0; font:inherit}
-  .as-hidden{display:none}
   .as-rule{height:1px; background:linear-gradient(90deg,transparent,#c5a25a,transparent); margin:16px 0}
 
   /* Two columns when there's room */
   .as-columns{ display:grid; gap:18px; }
-  @media (min-width:1100px){ .as-columns{ grid-template-columns: 1.15fr .85fr; align-items:start } }
+  @media (min-width:1100px){
+    .as-columns{ grid-template-columns: 1.15fr .85fr; align-items:start; }
+  }
 
   /* --- Gift / Need --- */
-  .gift-box,.need-box{ border:1px solid rgba(197,162,90,.45); border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7); margin:12px 0 }
-  .gift-icon{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px; margin-right:8px; border:1px solid rgba(197,162,90,.55); color:#ae8b46; font-size:14px; background:linear-gradient(180deg,#fff,#fff6e6);} 
-  .gift-box p{margin:6px 0}
+  .gift-box,.need-box{
+    border:1px solid rgba(197,162,90,.45);
+    border-radius:14px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7);
+    margin:12px 0;
+  }
+  .gift-icon{display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:999px; margin-right:8px;
+    border:1px solid rgba(197,162,90,.55); color:#ae8b46; font-size:14px;
+    background:linear-gradient(180deg,#fff,#fff6e6);} 
+  .gift-box p{margin:6px 0;}
   .gift-affirm{font-style:italic; color:#6b7280; margin-top:6px}
 
   /* Chips */
   .as-chips{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0}
-  .as-chip{font-size:12px; padding:6px 10px; border:1px solid rgba(197,162,90,.45); border-radius:999px; background:#fffdf7}
+  .as-chip{font-size:12px; padding:6px 10px; border:1px solid rgba(197,162,90,.45);
+    border-radius:999px; background:#fffdf7}
 
   /* Premium remedy layout */
   .as-remedy{border:1px solid rgba(197,162,90,.35); border-radius:16px; padding:14px 16px; background:linear-gradient(180deg,#fff,#fffaf7); margin:12px 0}
   .as-remedy-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
   .as-badge{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid rgba(197,162,90,.6); border-radius:999px; background:linear-gradient(180deg,#fff,#fffaf0); font-weight:600}
   .as-badge svg{width:16px; height:16px; color:#ae8b46}
+  .as-badge a{color:inherit; text-decoration:none; border-bottom:none}
 
   @media print{
     body{background:#fff}
     .as-wrap{margin:0; padding:0}
     .as-card{box-shadow:none; border:0; border-radius:0}
     .as-card a{color:#000; border-bottom:1px solid #000}
+    .as-bg{display:none!important}
   }
   </style>
 </head>
@@ -151,6 +180,20 @@
     </video>
     <div class="as-bg-stars"></div>
   </div>
+
+  <!-- Helper macro for unified fragrance chip -->
+  {% macro fragrance_badge(name, url=None) -%}
+    <span class="as-badge" aria-label="Recommended fragrance">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
+      </svg>
+      {%- if url -%}
+        <a href="{{ url }}" target="_blank" rel="noopener">{{ name }}</a>
+      {%- else -%}
+        {{ name }}
+      {%- endif -%}
+    </span>
+  {%- endmacro %}
 
   <div class="as-wrap">
     <article class="as-card">
@@ -174,7 +217,7 @@
       </section>
 
       <div class="as-columns">
-        <!-- Elemental Profile (cleaned) -->
+        <!-- Elemental Profile -->
         <section class="as-section">
           <h2>Elemental Profile</h2>
 
@@ -232,16 +275,11 @@
               </ul>
             </div>
 
-            <!-- Premium Remedy block (kept) -->
+            <!-- Premium Remedy block -->
             <div class="as-remedy">
               <div class="as-remedy-head">
                 <strong>Your Remedy:</strong>
-                <span class="as-badge" aria-label="Recommended fragrance">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M10 3h4M12 3v5l5 8a4 4 0 0 1-3.4 6H10.4A4 4 0 0 1 7 16l5-8" stroke="currentColor"/>
-                  </svg>
-                  {{ (result.get('fragrance_inspired_name') or '') | striptags }}
-                </span>
+                {{ fragrance_badge((result.get('fragrance_inspired_name') or '') | striptags, result.get('fragrance_url')) }}
               </div>
               <p style="margin:6px 0 8px">A grounding blend that turns passion into purpose and intensity into clarity.</p>
 
@@ -249,24 +287,6 @@
                 <span class="as-chip">Centers breath &amp; focus</span>
                 <span class="as-chip">Softens reactivity</span>
                 <span class="as-chip">Guides action with calm</span>
-              </div>
-
-              {% if result.get('fragrance_url') %}
-              <p style="margin-top:6px">
-                <a class="as-cta" href="{{ result.get('fragrance_url') }}" target="_blank" rel="noopener">Explore Blend</a>
-                <a class="as-subtle-link" href="{{ result.get('fragrance_url') }}#details" target="_blank" rel="noopener">Learn more about this blend</a>
-              </p>
-            {% endif %}
-</div>
-
-            <!-- Weak Planet block MOVED HERE & matched styling -->
-            <!-- Read more (elemental intro only) -->
-            <div class="as-more">
-              <button class="as-more-toggle" type="button" onclick="this.nextElementSibling.classList.toggle('as-hidden'); this.textContent = this.textContent.includes('Read') ? 'Hide full insight' : 'Read full insight';">Read full insight</button>
-              <div class="as-hidden">
-                <div class="as-callout" style="margin-top:10px">
-                  <p>{{ (result.get('elemental_intro') or '') | safe }}</p>
-                </div>
               </div>
             </div>
           </div>
@@ -291,7 +311,7 @@
 
             <p class="as-muted"><b>Guidance:</b> {{ result.get('dasha_guidance','') }}</p>
 
-            <!-- Mahadasha ritual card (generic read-more removed) -->
+            <!-- Mahadasha Healing Offering -->
             <div class="as-ritual">
               <h3>
                 <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -301,13 +321,13 @@
                 Mahadasha Healing Offering
               </h3>
               <p>
-                Offer <strong>{{ (result.get('mahadasha_frag_linked') or maha_frag) | safe }}</strong>
+                Offer {{ fragrance_badge((result.get('mahadasha_frag') or maha_frag) | striptags, result.get('mahadasha_frag_url')) }}
                 in devotion to <em>{{ result.get('mahadasha','') }}</em> until <strong>{{ result.get('mahadasha_end','') }}</strong>.
               </p>
               <ul class="as-bullets">
                 <li>Grounds intensity</li>
                 <li>Fosters clarity</li>
-                <li>Can be dedicated to <strong>Lord Hanuman</strong> or <strong>Lord Subramanya</strong></li>
+                <li>Dedicated to Lord Hanuman or Lord Subramanya — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
               </ul>
 
               {% if result.get('mahadasha_frag_url') %}
@@ -318,7 +338,7 @@
               {% endif %}
             </div>
 
-            <!-- Antardasha ritual card -->
+            <!-- Antardasha Healing Offering -->
             <div class="as-ritual">
               <h3>
                 <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -328,11 +348,14 @@
                 Antardasha Healing Offering
               </h3>
               <p>
-                Offer <strong>{{ (result.get('antardasha_frag_linked') or anta_frag) | safe }}</strong>
-                in reverence to <em>{{ result.get('antardasha','') }}</em>.
-                If a {{ result.get('antardasha','') }} idol — representing {{ result.get('offering_to','') }} — is unavailable,
-                invoke their presence through heartfelt intention before <strong>Lord Shiva</strong> until <strong>{{ result.get('antardasha_end','') }}</strong>.
+                Offer {{ fragrance_badge((result.get('antardasha_frag') or anta_frag) | striptags, result.get('antardasha_frag_url')) }}
+                in reverence to <em>{{ result.get('antardasha','') }}</em> until <strong>{{ result.get('antardasha_end','') }}</strong>.
               </p>
+              <ul class="as-bullets">
+                <li>Deepens harmony in relationships</li>
+                <li>Supports creativity and self-expression</li>
+                <li>Dedicated to Goddess Lakshmi or Lord Krishna — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
+              </ul>
 
               {% if result.get('antardasha_frag_url') %}
                 <p>
@@ -347,9 +370,7 @@
         </div>
       </div>
 
-      <!-- Removed: duplicate Weak Planet sections (mobile/desktop) previously outside the main columns -->
-
-      <!-- Weak Planet (full-width, spans across card) -->
+      <!-- Weak Planet (full-width) -->
       {% if result.get('weak_planet') and (result.get('weak_fragrance_linked') or result.get('weak_fragrance')) %}
       <section class="as-section">
         <div class="as-ritual">
@@ -361,17 +382,18 @@
             Balancing a Weak {{ result.get('weak_planet','') }}
           </h3>
           <p>
-            Apply <strong>{{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | safe }}</strong>
+            Apply {{ fragrance_badge((result.get('weak_fragrance') or '') | striptags, result.get('weak_fragrance_url')) }}
             to gently balance {{ result.get('weak_planet','') }}’s diminished influence.
           </p>
           <ul class="as-bullets">
             <li>{{ result.get('weak_healing_message','') }}</li>
             <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
           </ul>
+
           {% if result.get('weak_fragrance_url') %}
             <p>
               <a class="as-cta" href="{{ result.get('weak_fragrance_url') }}" target="_blank" rel="noopener">
-                Experience {{ (result.get('weak_fragrance_linked') or result.get('weak_fragrance') or '') | striptags }}
+                Experience {{ (result.get('weak_fragrance') or '') | striptags }}
               </a>
               <a class="as-subtle-link" href="{{ result.get('weak_fragrance_url') }}#details" target="_blank" rel="noopener">
                 Learn more about this blend
@@ -382,12 +404,12 @@
       </section>
       {% endif %}
 
-      <!-- Footer divider only -->
+      <!-- Divider -->
       <section class="as-section">
         <div class="as-divider" style="max-width:360px">◆</div>
       </section>
 
-      <!-- NEW: Customer-centric closing note -->
+      <!-- Closing note -->
       <section class="as-section">
         <div class="as-callout">
           <p><strong>This is your unique cosmic reading, meant only for you. More than a scent, it’s a fragrance to help you move closer to your true self.</strong></p>
