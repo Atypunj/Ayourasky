@@ -59,7 +59,7 @@
 
   /* Layout + card */
   .as-wrap{ max-width:1200px; margin:24px auto; padding:0 24px }
-  @media (min-width:1400px){ .as-wrap{ max-width:1320px; } }
+  @media (min-width:1400px){ .as-wrap{ max-width:1320px } }
   .as-card{
     position:relative; overflow:hidden; background:var(--card); border-radius:22px;
     padding:22px 26px 28px; box-shadow:0 24px 48px rgba(0,0,0,.06);
@@ -343,13 +343,6 @@
                 <li>Fosters clarity</li>
                 <li>Dedicated to Lord Hanuman or Lord Subramanya — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
               </ul>
-              {% set _m_url = result.get('mahadasha_frag_url') or FRAG_LINKS.get(((result.get('mahadasha_frag') or maha_frag) | striptags)) %}
-              {% if _m_url %}
-                <p>
-                  <a class="as-cta" href="{{ _m_url }}" target="_blank" rel="noopener">Buy {{ (result.get('mahadasha_frag') or maha_frag) | striptags }}</a>
-                  <a class="as-subtle-link" href="{{ _m_url }}#details" target="_blank" rel="noopener">Learn more</a>
-                </p>
-              {% endif %}
             </div>
 
             <!-- Antardasha -->
@@ -370,13 +363,6 @@
                 <li>Supports creativity and self-expression</li>
                 <li>Dedicated to Goddess Lakshmi or Lord Krishna — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
               </ul>
-              {% set _a_url = result.get('antardasha_frag_url') or FRAG_LINKS.get(((result.get('antardasha_frag') or anta_frag) | striptags)) %}
-              {% if _a_url %}
-                <p>
-                  <a class="as-cta" href="{{ _a_url }}" target="_blank" rel="noopener">Buy {{ (result.get('antardasha_frag') or anta_frag) | striptags }}</a>
-                  <a class="as-subtle-link" href="{{ _a_url }}#details" target="_blank" rel="noopener">Learn more</a>
-                </p>
-              {% endif %}
             </div>
 
             <div class="as-rule"></div>
@@ -403,15 +389,6 @@
             <li>{{ result.get('weak_healing_message','') }}</li>
             <li>Use during quiet breathwork or prayer to restore inner steadiness</li>
           </ul>
-          {% set _w_url = result.get('weak_fragrance_url') or FRAG_LINKS.get(((result.get('weak_fragrance') or '') | striptags)) %}
-          {% if _w_url %}
-            <p>
-              <a class="as-cta" href="{{ _w_url }}" target="_blank" rel="noopener">
-                Buy {{ (result.get('weak_fragrance') or '') | striptags }}
-              </a>
-              <a class="as-subtle-link" href="{{ _w_url }}#details" target="_blank" rel="noopener">Learn more</a>
-            </p>
-          {% endif %}
         </div>
       </section>
       {% endif %}
