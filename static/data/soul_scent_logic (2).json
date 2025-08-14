@@ -1,0 +1,100 @@
+{
+    "life_path": {
+        "1": {
+            "scent": "Agnideva",
+            "traits": [
+                "leadership",
+                "independence"
+            ]
+        },
+        "2": {
+            "scent": "Shanti Chaitanya",
+            "traits": [
+                "harmony",
+                "cooperation"
+            ]
+        },
+        "3": {
+            "scent": "Vrindavan Pushpa",
+            "traits": [
+                "creativity",
+                "expression"
+            ]
+        },
+        "4": {
+            "scent": "Tapasya Nectar",
+            "traits": [
+                "stability",
+                "discipline"
+            ]
+        },
+        "5": {
+            "scent": "Bhoomi Aura",
+            "traits": [
+                "freedom",
+                "adaptability"
+            ]
+        },
+        "6": {
+            "scent": "Radha Rasa",
+            "traits": [
+                "nurturing",
+                "balance"
+            ]
+        },
+        "7": {
+            "scent": "Sacred Dhupa",
+            "traits": [
+                "spirituality",
+                "introspection"
+            ]
+        },
+        "8": {
+            "scent": "Sandalwood Nirvana",
+            "traits": [
+                "power",
+                "ambition"
+            ]
+        },
+        "9": {
+            "scent": "Kamal Sparsh",
+            "traits": [
+                "compassion",
+                "wisdom"
+            ]
+        }
+    },
+    "elemental_profile": {
+        "Fire": {
+            "balancing_oil": "Agnideva"
+        },
+        "Water": {
+            "balancing_oil": "Shanti Chaitanya"
+        },
+        "Air": {
+            "balancing_oil": "Radha Rasa"
+        },
+        "Earth": {
+            "balancing_oil": "Bhoomi Aura"
+        },
+        "Ether": {
+            "balancing_oil": "Sacred Dhupa"
+        }
+    },
+    "planetary_guidance": {
+        "Venus-Mercury": {
+            "guidance": "Lean into intellect, business, communication; avoid overthinking, inconsistency, anxiety.",
+            "supportive_blends": {
+                "Mercury": "Shanti Chaitanya",
+                "Venus": "Radha Rasa"
+            }
+        },
+        "Mars-Moon": {
+            "guidance": "Channel emotions into action; avoid impulsivity, mood swings.",
+            "supportive_blends": {
+                "Mars": "Agnideva",
+                "Moon": "Kamal Sparsh"
+            }
+        }
+    }
+}
