@@ -219,7 +219,7 @@
             <div class="field noicon">
               <label for="dob">Date of Birth</label>
               <div class="control">
-                <input type="date" name="dob" id="dob" required />
+                <input type="date" name="dob" id="dob" required pattern="\d{4}-\d{2}-\d{2}" />
                 <button type="button" class="picker" aria-label="Open date picker">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
@@ -406,6 +406,18 @@
       submitBtn.textContent='Calculating…';
       setTimeout(()=>{ submitBtn.disabled=false; submitBtn.textContent=original; },2200);
     });
+    // Restrict DOB year to max 4 digits when typing
+const dobInput = document.getElementById('dob');
+dobInput.addEventListener('input', () => {
+  const val = dobInput.value;
+  const match = val.match(/^(\d{4})-(\d{0,2})-(\d{0,2})$/);
+  if (!match) return;
+  if (match[1] && match[1].length > 4) {
+    dobInput.value = match[1].slice(0, 4) + 
+                     (match[2] ? '-' + match[2] : '') + 
+                     (match[3] ? '-' + match[3] : '');
+  }
+});
   </script>
 </body>
 </html>
