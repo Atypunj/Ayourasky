@@ -406,17 +406,36 @@
       submitBtn.textContent='Calculating…';
       setTimeout(()=>{ submitBtn.disabled=false; submitBtn.textContent=original; },2200);
     });
-    // Restrict DOB year to max 4 digits when typing
+   // Enforce 4-digit year in the date input while typing + on change
 const dobInput = document.getElementById('dob');
-dobInput.addEventListener('input', () => {
-  const val = dobInput.value;
-  const match = val.match(/^(\d{4})-(\d{0,2})-(\d{0,2})$/);
-  if (!match) return;
-  if (match[1] && match[1].length > 4) {
-    dobInput.value = match[1].slice(0, 4) + 
-                     (match[2] ? '-' + match[2] : '') + 
-                     (match[3] ? '-' + match[3] : '');
+
+function clampYearTo4() {
+  let v = dobInput.value || '';
+  // If user typed only digits (no hyphen yet), just clamp to 4
+  if (!v.includes('-')) {
+    if (v.length > 4) dobInput.value = v.slice(0, 4);
+    return;
   }
+  // If we already have hyphens, clamp the year part (before first '-')
+  const parts = v.split('-');
+  if (parts[0].length > 4) {
+    parts[0] = parts[0].slice(0, 4);
+    dobInput.value = parts.join('-');
+  }
+}
+
+dobInput.addEventListener('input', clampYearTo4);
+dobInput.addEventListener('change', clampYearTo4);
+
+// Optional: mark invalid if not exactly YYYY-MM-DD on blur/change
+dobInput.addEventListener('blur', () => {
+  const ok = /^\d{4}-\d{2}-\d{2}$/.test(dobInput.value);
+  dobInput.setCustomValidity(ok ? '' : 'Use YYYY-MM-DD (4-digit year).');
+});
+
+// Optional but recommended: constrain range
+dobInput.setAttribute('min', '1900-01-01');
+dobInput.setAttribute('max', '2099-12-31');
 });
   </script>
 </body>
