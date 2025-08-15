@@ -203,6 +203,7 @@ with open("dasha_data.json", "r", encoding="utf-8") as f:
 dasha_sequence = dasha_data["sequence"]
 dasha_years = dasha_data["years"]
 import swisseph as swe
+swe.set_ephe_path("sweph/ephe")
 RAHU_ID = swe.MEAN_NODE  # Rahu (mean node)
 KETU_ID = swe.TRUE_NODE  # Ketu (true node)
 
