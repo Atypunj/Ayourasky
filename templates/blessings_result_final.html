@@ -336,8 +336,8 @@
               </h3>
               <p>
                 Offer {{ fragrance_badge(((result.get('mahadasha_frag') or maha_frag) | striptags), result.get('mahadasha_frag_url')) }}
-                in devotion to <em>{{ result.get('mahadasha','') }}</em> until <strong>{{ result.get('mahadasha_end','') }}</strong>.
-                {{ result.get('mahadasha_benefits', <br>'This sacred fragrance grounds your energy, fosters mental clarity, and aligns you with divine protection.') }}
+                in devotion to <em>{{ result.get('mahadasha','') }}</em> until <strong>{{ result.get('mahadasha_end','') }}</strong>. <br>
+                {{ result.get('mahadasha_benefits','This sacred fragrance grounds your energy, fosters mental clarity, and aligns you with divine protection.') }}
                 Dedicated to Lord Hanuman or Lord Subramanya — if unavailable, invoke their presence through heartfelt intention before Lord Shiva.
               </p>
             </div>
@@ -353,8 +353,8 @@
               </h3>
               <p>
                 Offer {{ fragrance_badge(((result.get('antardasha_frag') or anta_frag) | striptags), result.get('antardasha_frag_url')) }}
-                in reverence to <em>{{ result.get('antardasha','') }}</em> until <strong>{{ result.get('antardasha_end','') }}</strong>.
-                {{ result.get('antardasha_benefits', <br>'This blessed fragrance deepens harmony, supports creativity and self-expression, and invites auspicious grace.') }}
+                in reverence to <em>{{ result.get('antardasha','') }}</em> until <strong>{{ result.get('antardasha_end','') }}</strong>.<br>
+                {{ result.get('antardasha_benefits', 'This blessed fragrance deepens harmony, supports creativity and self-expression, and invites auspicious grace.') }}
                 Dedicated to Goddess Lakshmi or Lord Krishna — if unavailable, invoke their presence through heartfelt intention before Lord Shiva.
               </p>
             </div>
