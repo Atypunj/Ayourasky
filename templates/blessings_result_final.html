@@ -325,7 +325,7 @@
 
             <p class="as-muted"><b>Guidance:</b> {{ result.get('dasha_guidance','') }}</p>
 
-            <!-- Mahadasha -->
+            <!-- Mahadasha (paragraph style) -->
             <div class="as-ritual">
               <h3>
                 <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -337,15 +337,12 @@
               <p>
                 Offer {{ fragrance_badge(((result.get('mahadasha_frag') or maha_frag) | striptags), result.get('mahadasha_frag_url')) }}
                 in devotion to <em>{{ result.get('mahadasha','') }}</em> until <strong>{{ result.get('mahadasha_end','') }}</strong>.
+                {{ result.get('mahadasha_benefits', 'This sacred fragrance grounds your energy, fosters mental clarity, and aligns you with divine protection.') }}
+                Dedicated to Lord Hanuman or Lord Subramanya — if unavailable, invoke their presence through heartfelt intention before Lord Shiva.
               </p>
-              <ul class="as-bullets">
-                <li>Grounds intensity</li>
-                <li>Fosters clarity</li>
-                <li>Dedicated to Lord Hanuman or Lord Subramanya — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
-              </ul>
             </div>
 
-            <!-- Antardasha -->
+            <!-- Antardasha (paragraph style) -->
             <div class="as-ritual">
               <h3>
                 <svg class="as-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -357,12 +354,9 @@
               <p>
                 Offer {{ fragrance_badge(((result.get('antardasha_frag') or anta_frag) | striptags), result.get('antardasha_frag_url')) }}
                 in reverence to <em>{{ result.get('antardasha','') }}</em> until <strong>{{ result.get('antardasha_end','') }}</strong>.
+                {{ result.get('antardasha_benefits', 'This blessed fragrance deepens harmony, supports creativity and self-expression, and invites auspicious grace.') }}
+                Dedicated to Goddess Lakshmi or Lord Krishna — if unavailable, invoke their presence through heartfelt intention before Lord Shiva.
               </p>
-              <ul class="as-bullets">
-                <li>Deepens harmony in relationships</li>
-                <li>Supports creativity and self-expression</li>
-                <li>Dedicated to Goddess Lakshmi or Lord Krishna — if unavailable, invoke their presence through heartfelt intention before Lord Shiva</li>
-              </ul>
             </div>
 
             <div class="as-rule"></div>
@@ -410,3 +404,4 @@
 
 </body>
 </html>
+
